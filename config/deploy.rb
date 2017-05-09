@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock "3.8.1"
 
-set :application, "wifriend.io"
+set :application, "wifriend"
 set :repo_url, "git@github.com:mcknight0219/#{fetch(:application)}.git"
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
