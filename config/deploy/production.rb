@@ -8,9 +8,9 @@ server '45.79.75.244',
     user: fetch(:user),
     primary: true
 
-set :deploy_to, "/home/#{fetch(:user)/apps/#{fetch(:application)}"
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 
-set :rbenv_ruby, '2.2.3'
+set :rbenv_ruby, '2.2.5'
 
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.socket"
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
@@ -51,28 +51,28 @@ namespace :deploy do
         end
     end
 
-     desc 'Restart app' 
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
-  
-  desc "Run a task on remote server."
-  task :invoke do
-    fail 'no task provided' unless ENV['task']
-
-    on roles(:app) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, ENV['task']
+    desc 'Restart app' 
+    task :restart do
+        on roles(:app), in: :sequence, wait: 5 do
+            invoke 'puma:restart'
         end
-      end
     end
-  end
+  
+    desc "Run a task on remote server."
+    task :invoke do
+        fail 'no task provided' unless ENV['task']
 
-  after :finishing, :compile_assets
-  after :finishing, :cleanup
-  after :finishing, :restart
+        on roles(:app) do
+            within release_path do
+                with rails_env: fetch(:rails_env) do
+                    execute :rake, ENV['task']
+                end
+            end
+        end
+    end
+
+    after :finishing, :compile_assets
+    after :finishing, :cleanup
+    after :finishing, :restart
 end
 

@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
-lock "3.7.2"
+lock "3.8.1"
 
 set :application, "wifriend.io"
-set :repo_url, "git@example.com:mcknight0219/#{fetch(:application)}.git"
+set :repo_url, "git@github.com:mcknight0219/#{fetch(:application)}.git"
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :use_sudo, false
@@ -16,4 +16,19 @@ namespace :deploy do
     task :restart do
         invoke 'puma:smart_restart'
     end
+end
+
+namespace :rake do
+  desc "Run a task on remote server."
+  task :invoke do
+    fail 'no task provided' unless ENV['task']
+
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, ENV['task']
+        end
+      end
+    end
+  end
 end
