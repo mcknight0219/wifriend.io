@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div class="container">
-      <nav class="nav">
+    <nav class="nav">
+      <div class="container">
         <div class="nav-left">
           <a class="nav-item is-brand" href="/">WiFriend</a>
         </div>
@@ -16,15 +16,25 @@
           <router-link to="resume" class="nav-item is-tab" active-class="is-active">简历</router-link>
           <router-link to="about" class="nav-item is-tab" active-class="is-active">关于</router-link>
         </div>
-      </nav>
-    </div>
-    <section class="hero">
-      <div class="container is-fluid">
-        <transition mode="out-in" enter-active-class="fadeIn" leave-active-class="fadeOut" appear>
-          <router-view class="animated"></router-view>
-        </transition>
       </div>
-    </section>
+    </nav>
+  
+    <div class="app-main">
+        <div class="container is-fluid">
+          <transition mode="out-in" enter-active-class="fadeIn" leave-active-class="fadeOut" appear>
+            <router-view class="animated"></router-view>
+          </transition>
+        </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            © Copyright 2007 - 2017 by mcknight0219.
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -67,6 +77,20 @@ export default {
 
 <style lang="scss">
 body {
-  font-family: "Lato", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+  font-family: "Lato", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  
+  #app {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  
+    .app-main {
+      flex: 1;
+    }
+
+    footer {
+      font-family: "Optima","Helvetica Neue",sans-serif;
+    }
+  }
 }
 </style>
