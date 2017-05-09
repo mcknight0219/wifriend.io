@@ -8,7 +8,8 @@ import About from '../components/about'
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/', component:       Home },
+    { path: '/', redirect: '/home' },
+    { path: '/home', component:       Home },
     { path: '/blog', component:   Blog },
     { path: '/resume', component: Resume },
     { path: '/about', component:  About }
