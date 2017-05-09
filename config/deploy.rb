@@ -2,7 +2,7 @@
 lock "3.8.1"
 
 set :application, "wifriend"
-set :repo_url, "git@github.com:mcknight0219/#{fetch(:application)}.git"
+set :repo_url, "git@github.com:mcknight0219/#{fetch(:application)}.io.git"
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :use_sudo, false

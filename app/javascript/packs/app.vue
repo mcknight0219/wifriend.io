@@ -1,26 +1,24 @@
 <template>
   <div id="app">
-    <section class="hero">
-      <div class="hero-head">
-        <div class="container">
-          <nav class="nav">
-            <div class="nav-left">
-              <a class="nav-item is-brand" href="/">WiFriend</a>
-            </div>
-            <span id="nav-toggle" class="nav-toggle" v-on:click="toggleDropdown(!showDropdown)">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-            <div id="nav-menu" class="nav-right nav-menu" v-bind:class="{ 'is-active': showDropdown }">
-              <router-link to="home" class="nav-item is-tab" active-class="is-active">主页</router-link>
-              <router-link to="blog" class="nav-item is-tab" active-class="is-active">博客</router-link>
-              <router-link to="resume" class="nav-item is-tab" active-class="is-active">简历</router-link>
-              <router-link to="about" class="nav-item is-tab" active-class="is-active">关于</router-link>
-            </div>
-          </nav>
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="nav-item is-brand" href="/">WiFriend</a>
         </div>
-      </div>
+        <span id="nav-toggle" class="nav-toggle" v-bind:class="{ 'is-active': showDropdown }" v-on:click="toggleDropdown(!showDropdown)">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div id="nav-menu" class="nav-right nav-menu" v-bind:class="{ 'is-active': showDropdown }">
+          <router-link to="home" class="nav-item is-tab" active-class="is-active">主页</router-link>
+          <router-link to="blog" class="nav-item is-tab" active-class="is-active">博客</router-link>
+          <router-link to="resume" class="nav-item is-tab" active-class="is-active">简历</router-link>
+          <router-link to="about" class="nav-item is-tab" active-class="is-active">关于</router-link>
+        </div>
+      </nav>
+    </div>
+    <section class="hero">
       <div class="container is-fluid">
         <transition mode="out-in" enter-active-class="fadeIn" leave-active-class="fadeOut" appear>
           <router-view class="animated"></router-view>
@@ -68,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss">
-  body {
-    font-family: "Lato", "Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif
-  }
+body {
+  font-family: "Lato", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+}
 </style>
