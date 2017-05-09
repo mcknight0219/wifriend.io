@@ -39,6 +39,8 @@ gem 'jbuilder', '~> 2.5'
 group :development do
   gem 'capistrano-rails', '~> 1.2.3', group: :development
   gem 'capistrano3-puma', group: :development
+  gem 'capistrano-rvm', group: :development
+  gem 'capistrano-nvm', group: :development
   gem 'capistrano-rbenv', group: :development
 end
 
