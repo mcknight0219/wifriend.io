@@ -9,6 +9,9 @@ module.exports = merge(devConfig, {
   devServer: {
     host: devServer.host,
     port: devServer.port,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
     compress: true,
     historyApiFallback: true,
     contentBase: resolve(paths.output, paths.entry),
