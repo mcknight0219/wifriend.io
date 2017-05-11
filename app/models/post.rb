@@ -1,7 +1,6 @@
-class Post < ApplicationRecord
-    
+class Post < ApplicationRecord  
     def tags=(tags)
-        tags = tags.map { |s| s.strip }.join(',') if if tags.is_a?(Array)
+        tags = tags.map { |s| s.strip }.join(',') if tags.is_a?(Array)
         super(tags)
     end
     
@@ -13,6 +12,6 @@ class Post < ApplicationRecord
     end
 
     def self.find_by_tag(tag)
-        Post.all.filter { |p| p.all_tags.include? tag }
+      Post.all.filter { |p| p.all_tags.include? tag }
     end
 end
