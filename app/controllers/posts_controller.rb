@@ -1,6 +1,4 @@
-class PostsController < ApplicationController
-    respond_to :json
-    
+class PostsController < ApplicationController    
     def index
         Post.all.as_json(except: [:updated_at])
     end
