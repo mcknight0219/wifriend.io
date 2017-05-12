@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="nav">
+    <nav class="nav has-shadow">
       <div class="container">
         <div class="nav-left">
           <a class="nav-item is-brand" href="/">WiFriend</a>
