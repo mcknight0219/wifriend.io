@@ -5,7 +5,7 @@ import Blog from '../components/blog'
 import Resume from '../components/resume'
 import About from '../components/about'
 import Login from '../components/login'
-import Editor from '../components/editor'
+import Dashboard from '../components/dashboard'
 
 Vue.use(VueRouter)
 
@@ -16,7 +16,7 @@ const routes = [
     { path: '/resume', component: Resume },
     { path: '/about', component:  About },
     { path: '/login',  component: Login },
-    { path: '/editor', component: Editor }
+    { path: '/dashboard', component: Dashboard }
 ]
 
 export default new VueRouter({ routes })

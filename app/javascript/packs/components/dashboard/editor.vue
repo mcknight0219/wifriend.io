@@ -1,11 +1,11 @@
 <template>
-    <section class="section">
+    <section class="section" style="padding-top: 0;">
         <div class="fluid-container">
             <div class="columns">
                 <div class="column is-6 is-offset-3">
                     <article class="message is-danger" v-if="hasError">
                         <div class="message-header">
-                            <p>Warning</p>
+                            <p>警告</p>
                             <button class="delete" @click="closeNotice"></button>
                         </div>
                         <div class="message-body">
@@ -13,7 +13,7 @@
                         </div>
                     </article>
                     <div class="field">
-                        <label class="label">Title</label>
+                        <label class="label">题目</label>
                         <p class="control">
                             <input class="input" type="text" placeholder="牛逼的名字" v-model="title">
                         </p>
@@ -104,7 +104,6 @@ export default {
         },
 
         toggleFullscreen() {
-            debugger
             const el = document.getElementById("editor")
             const isFull = document.isFull || document.mozFullScreen || document.webkitIsFullScreen
 
@@ -139,6 +138,7 @@ export default {
             tabSize: '2',
             indentWithTabs: true,
             lineNumbers: true,
+            lineWrapping: true,
             autofocus: true,
             extraKeys: {
                 'Enter': '',
@@ -180,6 +180,6 @@ export default {
 }
 
 .CodeMirror {
-    height: 640px;
+    height: 570px;
 }
 </style>
