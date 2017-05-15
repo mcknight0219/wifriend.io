@@ -25,15 +25,6 @@
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>
                                 <a class="button is-white">
-                                    <i class="fa fa-bold" aria-hidden="true"></i>
-                                </a>
-                                <a class="button is-white">
-                                    <i class="fa fa-italic" aria-hidden="true"></i>
-                                </a>
-                                <a class="button is-white">
-                                    <i class="fa fa-underline" aria-hidden="true"></i>
-                                </a>
-                                <a class="button is-white">
                                     <i class="fa fa-list-ol" aria-hidden="true"></i>
                                 </a>
                                 <a class="button is-white">
