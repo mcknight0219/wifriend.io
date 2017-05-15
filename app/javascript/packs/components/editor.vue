@@ -9,7 +9,7 @@
                             <button class="delete" @click="closeNotice"></button>
                         </div>
                         <div class="message-body">
-                            题目或文章内容不能为空    
+                            题目或文章内容不能为空
                         </div>
                     </article>
                     <div class="field">
@@ -18,10 +18,10 @@
                             <input class="input" type="text" placeholder="牛逼的名字" v-model="title">
                         </p>
                     </div>
-                    <nav class="level is-mobile">
+                    <nav class="level is-mobile" style="margin-bottom: 0;">
                         <div class="level-left">
                             <div class="level-item">
-                                <a class="button is-white is-focused">
+                                <a class="button is-white is-focused" @click="togglePreview">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>
                                 <a class="button is-white">
@@ -52,8 +52,12 @@
                             </div>
                         </div>
                     </nav>
-                    <div id="editor"></div>
-                    <div class="field is-grouped">
+                    <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden; height: 560px;">
+                        <div v-bind:class="{ 'editor-preview-active': isPreview }" class="editor-preview CodeMirror" v-html="previewHtml">
+                        </div>
+                    </div>
+    
+                    <div class="field is-grouped" style="margin-top: 35px;">
                         <p class="control">
                             <button class="button is-primary" @click="publish">发布</button>
                         </p>
@@ -68,6 +72,7 @@
 </template>
 
 <script>
+var marked = require('marked')
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 
@@ -78,12 +83,14 @@ export default {
     data() {
         return {
             title: '',
-            hasError: false
+            hasError: false,
+            isPreview: false,
+            previewHtml: ''
         }
     },
 
     methods: {
-        publish () {
+        publish() {
             const text = this.editor.getValue()
             const title = this.title
 
@@ -93,8 +100,16 @@ export default {
             }
         },
 
-        closeNotice () {
+        closeNotice() {
             this.hasError = false
+        },
+
+        togglePreview() {
+            this.isPreview = !this.isPreview
+            if (this.isPreview) {
+                debugger
+                this.previewHtml = marked(this.editor.getValue())
+            }
         },
 
         toggleFullscreen() {
@@ -129,10 +144,10 @@ export default {
     mounted() {
         this.editor = CodeMirror(document.getElementById("editor"), {
             mode: 'markdown',
-            theme: 'paper',
+            theme: 'dracula',
             tabSize: '2',
             indentWithTabs: true,
-            lineNumbers: false,
+            lineNumbers: true,
             autofocus: true,
             extraKeys: {
                 'Enter': '',
@@ -145,5 +160,35 @@ export default {
 </script>
 
 <style lang="scss">
+.editor-preview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    background: #f9f9f5;
+    z-index: 9999;
+    overflow: auto;
+    transition: left 0.2s ease
+}
 
+.editor-preview-active {
+    left: 0;
+}
+
+.editor-wrapper {
+    font: 16px/1.62 "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+    color: #2c3e50;
+
+    h1, h2, h3, h4 {
+        font-weight: bold;
+    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.15em; }
+}
+
+.CodeMirror {
+    height: 640px;
+}
 </style>
