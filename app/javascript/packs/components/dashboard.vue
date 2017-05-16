@@ -19,17 +19,20 @@
     </section>
     <Editor value="" v-if="tab === 'new'"></Editor>
     <List v-if="tab === 'all'"></List>
+    <Setting v-if="tab === 'setting'"></Setting>
 </div>
 </template>
 
 <script>
 import Editor from './dashboard/editor'
 import List from './dashboard/list'
+import Setting from './dashboard/setting'
 
 export default {
     components: {
         Editor,
-        List
+        List,
+        Setting
     },
 
     computed: {
@@ -48,7 +51,7 @@ export default {
 
     data () {
         return {
-            tab: 'new'
+            tab: 'all'
         }
     },
 

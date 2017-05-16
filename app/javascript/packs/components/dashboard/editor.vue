@@ -72,7 +72,8 @@ import 'codemirror/mode/markdown/markdown'
 export default {
     props: {
         value: {
-            type: String
+            type: String,
+            required: false
         }
     },
 

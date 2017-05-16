@@ -37,7 +37,8 @@
     "webpack-merge": "^4.1.0",
     "whatwg-fetch": "^2.0.3",
     "codemirror": "^5.25.2",
-    "marked":"^0.3.6"
+    "marked":"^0.3.6",
+    "vue-bulma-switch":"^1.0.4"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.4.5"
