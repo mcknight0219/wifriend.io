@@ -6,18 +6,6 @@
                     <nav class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item">
-                                <span>编辑器夜间主题</span>
-                            </div>
-                        </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <switches v-model="nightTheme" theme="bulma" type-bold="true"></switches>
-                            </div>
-                        </div>
-                    </nav>
-                    <nav class="level is-mobile">
-                        <div class="level-left">
-                            <div class="level-item">
                                 <span>自动保存间隔</span>
                             </div>
                         </div>
@@ -61,11 +49,7 @@
 </template>
 
 <script>
-import Switches from 'vue-switches'
 export default {
-    components: {
-        Switches
-    },
 
     data() {
         return {
