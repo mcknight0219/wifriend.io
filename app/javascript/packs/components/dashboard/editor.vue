@@ -14,7 +14,7 @@
                     </article>
                     <div class="field">
                         <p class="control">
-                            <input class="input" type="text" placeholder="题目" v-model="title">
+                            <input class="input" type="text" placeholder="题目 - English title for friendly url" v-model="title">
                         </p>
                     </div>
                     <nav class="level is-mobile" style="margin-bottom: 0;">
@@ -111,6 +111,7 @@ export default {
             let cursor = cm.getCursor()
             const curLine = cm.getLine(cursor.line)
             cm.replaceRange("> " + curLine, {line: cursor.line, ch: 0}, {line: cursor.line, ch: curLine.length})
+            cm.focus()
         },
 
         togglePreview() {
@@ -178,7 +179,9 @@ export default {
     background: #f9f9f5;
     z-index: 9999;
     overflow: auto;
-    transition: left 0.2s ease
+    transition: left 0.2s ease;
+    font: 16px/1.62 "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+    color: #2c3e50;
 }
 
 .editor-preview-active {
@@ -186,8 +189,6 @@ export default {
 }
 
 .editor-wrapper {
-    font: 16px/1.62 "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
-    color: #2c3e50;
 
     h1,
     h2,
@@ -204,7 +205,7 @@ export default {
     h3 {
         font-size: 1.15em;
     }
-    blockquote {
+    blockquote, ul, ol, li {
         -webkit-margin-before: 1em;
         -webkit-margin-after: 1em;
         -webkit-margin-start: 40px;
@@ -214,5 +215,6 @@ export default {
 
 .CodeMirror {
     height: 530px;
+    font-family: "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
 }
 </style>

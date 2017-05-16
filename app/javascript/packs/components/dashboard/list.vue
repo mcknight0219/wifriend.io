@@ -6,17 +6,18 @@
                     <ul class="article-list">
                         <li>
                             <a href="">
-                                <div class="title">Hello World <span class="tag is-light">草稿</span></div>
+                                <div class="article-title">Hello World <span class="tag is-light">草稿</span></div>
                                 <div class="subtitle">
                                     <a href="" class="is-link" style="color: gray">编辑</a>
                                     <a href="" class="is-link" style="color: red; margin-left: 7px;">删除</a>
                                     <span class="pull-right">24 May 17</span>
                                 </div>
                             </a>
+                            <br />
                         </li>
                         <li>
                             <a href="">
-                                <div class="title">2017 前端总结</div>
+                                <div class="article-title">2017 前端总结</div>
                                 <div class="subtitle">
                                     <a href="" class="is-link" style="color: gray">编辑</a>
                                     <a href="" class="is-link" style="color: red; margin-left: 7px;">删除</a>
@@ -43,7 +44,9 @@ export default {
         li {
             padding: 15px 8px;
 
-            .title {
+            .article-title {
+                color: black;
+                font-size: 1.25em;
                 font-weight: 300;
             }
 
