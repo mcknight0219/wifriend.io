@@ -214,7 +214,7 @@ export default {
 }
 
 .CodeMirror {
-    height: 530px;
+    height: 480px;
     font-family: "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
 }
 </style>

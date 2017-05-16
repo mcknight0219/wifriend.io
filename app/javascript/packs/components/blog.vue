@@ -14,8 +14,12 @@
                     </div>
                     <div class="column is-6">
                         <div class="blog-post-summary">
-                            <h3 class="title is-3">Hello World</h3>
-                            <p>哥十五年来每天长伞不离手，无论正常走路还是打着伞走都从来没有戳到过人或者伞尖碰到别人眼睛，可见修养之高[酷] 估计英国绅士们也有同感</p>
+                            <router-link :to="{ name: 'post', params: { year: '2017', month: '01', day: '01', title: 'hello world' }}">
+                                <h3 class="title is-3">Hello World</h3>
+                            </router-link>
+                            
+                            <p style="margin-top: 13px;">哥十五年来每天长伞不离手，无论正常走路还是打着伞走都从来没有戳到过人或者伞尖碰到别人眼睛，可见修养之高[酷] 估计英国绅士们也有同感</p>
+                             
                         </div>
                     </div>
                 </div>

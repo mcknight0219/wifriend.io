@@ -5,15 +5,14 @@
                 <div class="column is-8 is-offset-2">
                     <ul class="article-list">
                         <li>
-                            <a href="">
+                            <router-link :to="{ name: 'post', params: { year: '2017', month: '01', day: '01', title: 'hello world' }}">
                                 <div class="article-title">Hello World <span class="tag is-light">草稿</span></div>
                                 <div class="subtitle">
                                     <a href="" class="is-link" style="color: gray">编辑</a>
                                     <a href="" class="is-link" style="color: red; margin-left: 7px;">删除</a>
                                     <span class="pull-right">24 May 17</span>
                                 </div>
-                            </a>
-                            <br />
+                            </router-link>
                         </li>
                         <li>
                             <a href="">

@@ -11,10 +11,10 @@
           <span></span>
         </span>
         <div id="nav-menu" class="nav-right nav-menu" v-bind:class="{ 'is-active': showDropdown }">
-          <router-link to="home" class="nav-item is-tab" active-class="is-active">主页</router-link>
-          <router-link to="blog" class="nav-item is-tab" active-class="is-active">博客</router-link>
-          <router-link to="resume" class="nav-item is-tab" active-class="is-active">简历</router-link>
-          <router-link to="about" class="nav-item is-tab" active-class="is-active">关于</router-link>
+          <router-link :to="{name: 'home' }" class="nav-item is-tab" active-class="is-active">主页</router-link>
+          <router-link :to="{name: 'blog' }" class="nav-item is-tab" active-class="is-active">博客</router-link>
+          <router-link :to="{name: 'resume'}" class="nav-item is-tab" active-class="is-active">简历</router-link>
+          <router-link :to="{name: 'about'}" class="nav-item is-tab" active-class="is-active">关于</router-link>
         </div>
       </div>
     </nav>
