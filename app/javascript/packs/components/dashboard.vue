@@ -17,7 +17,7 @@
             </div>
         </div>
     </section>
-    <Editor v-if="tab === 'new'"></Editor>
+    <Editor value="" v-if="tab === 'new'"></Editor>
     <List v-if="tab === 'all'"></List>
 </div>
 </template>
