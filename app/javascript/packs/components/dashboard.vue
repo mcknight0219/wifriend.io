@@ -18,28 +18,31 @@
         </div>
     </section>
     <Editor v-if="tab === 'new'"></Editor>
+    <List v-if="tab === 'all'"></List>
 </div>
 </template>
 
 <script>
 import Editor from './dashboard/editor'
+import List from './dashboard/list'
 
 export default {
     components: {
-        Editor
+        Editor,
+        List
     },
 
     computed: {
         allActive () {
-            return self.tab === 'all'
+            return this.tab === 'all'
         },
 
         newActive () {
-            return self.tab === 'new'
+            return this.tab === 'new'
         },
 
         settingActive () {
-            return self.tab === 'setting'
+            return this.tab === 'setting'
         }
     },
 
@@ -51,7 +54,7 @@ export default {
 
     methods: {
         activate (tab) {
-            self.tab = tab
+            this.tab = tab
         }
     }
 }

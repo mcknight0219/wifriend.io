@@ -2,7 +2,7 @@
     <section class="section" style="padding-top: 0;">
         <div class="fluid-container">
             <div class="columns">
-                <div class="column is-6 is-offset-3">
+                <div class="column is-8 is-offset-2">
                     <article class="message is-danger" v-if="hasError">
                         <div class="message-header">
                             <p>警告</p>
@@ -13,22 +13,24 @@
                         </div>
                     </article>
                     <div class="field">
-                        <label class="label">题目</label>
                         <p class="control">
-                            <input class="input" type="text" placeholder="牛逼的名字" v-model="title">
+                            <input class="input" type="text" placeholder="题目" v-model="title">
                         </p>
                     </div>
                     <nav class="level is-mobile" style="margin-bottom: 0;">
                         <div class="level-left">
                             <div class="level-item">
-                                <a class="button is-white is-focused" @click="togglePreview">
+                                <a class="button is-white" @click="togglePreview" v-bind:class="{ 'is-active': isPreview }">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>
-                                <a class="button is-white">
+                                <a class="button is-white" @click="replaceWithOl">
                                     <i class="fa fa-list-ol" aria-hidden="true"></i>
                                 </a>
                                 <a class="button is-white">
                                     <i class="fa fa-list-ul" aria-hidden="true"></i>
+                                </a>
+                                <a class="button is-white" @click="toggleQuote">
+                                    <i class="fa fa-quote-left"></i>
                                 </a>
                                 <a class="button is-white">
                                     <i class="fa fa-code" aria-hidden="true"></i>
@@ -69,6 +71,9 @@ import 'codemirror/mode/markdown/markdown'
 
 export default {
     props: {
+        value: {
+            type: String
+        }
     },
 
     data() {
@@ -95,10 +100,21 @@ export default {
             this.hasError = false
         },
 
+        // Replace current line with ordered list
+        replaceWithOl() {
+            const cm = this.editor
+        },
+
+        toggleQuote() {
+            const cm = this.editor
+            let cursor = cm.getCursor()
+            const curLine = cm.getLine(cursor.line)
+            cm.replaceRange("> " + curLine, {line: cursor.line, ch: 0}, {line: cursor.line, ch: curLine.length})
+        },
+
         togglePreview() {
             this.isPreview = !this.isPreview
             if (this.isPreview) {
-                debugger
                 this.previewHtml = marked(this.editor.getValue())
             }
         },
@@ -133,6 +149,7 @@ export default {
 
     mounted() {
         this.editor = CodeMirror(document.getElementById("editor"), {
+            value: this.value,
             mode: 'markdown',
             theme: 'dracula',
             tabSize: '2',
@@ -141,7 +158,7 @@ export default {
             lineWrapping: true,
             autofocus: true,
             extraKeys: {
-                'Enter': '',
+                'Enter': 'newlineAndIndentContinueMarkdownList',
                 'Tab': '',
                 'Shift-Tab': ''
             }
@@ -171,15 +188,30 @@ export default {
     font: 16px/1.62 "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
     color: #2c3e50;
 
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
         font-weight: bold;
     }
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.5em; }
-    h3 { font-size: 1.15em; }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    h3 {
+        font-size: 1.15em;
+    }
+    blockquote {
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 40px;
+        -webkit-margin-end: 40px;
+    }
 }
 
 .CodeMirror {
-    height: 570px;
+    height: 530px;
 }
 </style>
