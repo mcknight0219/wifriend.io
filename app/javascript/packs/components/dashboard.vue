@@ -5,13 +5,13 @@
             <div class="tabs is-centered">
                 <ul>
                     <li v-bind:class="{'is-active': allActive}" >
-                        <a @click="activate('all')">所有文章</a>
+                        <a @click="activate('all')"><span class="icon"><i class="fa fa-th-large" aria-hidden="true"></i>列表</span></a>
                     </li>
                     <li v-bind:class="{'is-active': newActive}">
-                        <a  @click="activate('new')">新文章</a>
+                        <a  @click="activate('new')"><span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i>新文章</span></a>
                     </li>
                     <li v-bind:class="{'is-active': settingActive}">
-                        <a  @click="activate('setting')">设置</a>
+                        <a  @click="activate('setting')"><span class="icon"><i class="fa fa-cog" aria-hidden="true"></i>设置</span></a>
                     </li>
                 </ul>
             </div>

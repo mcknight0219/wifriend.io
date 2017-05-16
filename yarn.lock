@@ -4199,10 +4199,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-bulma-switch@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/vue-bulma-switch/-/vue-bulma-switch-1.0.4.tgz#52e99de5b57baa39b1bc80240b3ae5d43f53c522"
-
 vue-hot-reload-api@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
@@ -4236,6 +4232,13 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue-switches@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/vue-switches/-/vue-switches-1.1.5.tgz#5e47893b973cceeb8af085f92c6fbdeecb24ebb5"
+  dependencies:
+    node-sass "^4.5.2"
+    vue "^2.2.6"
+
 vue-template-compiler@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.3.2.tgz#d48a7f53df5f497033827182ceb4f0d340803017"
@@ -4247,7 +4250,7 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.2.tgz#a0a6c50c941d2a4abda963f2f42c337ac450ee95"
 
-vue@^2.3.2:
+vue@^2.2.6, vue@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.2.tgz#9e52aae3593480be235ff227557837e69f98203a"
 
