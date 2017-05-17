@@ -23,19 +23,19 @@
                         </div>
                     </div>
                 </div>
-                 <div class="columns" style="margin-top: 23px;">
+                 <div class="columns" style="margin-top: 23px;" v-for="post in posts">
                     <div class="column is-offset-2 is-2">
                         <div>
-                            <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span> 01 Apr 17
+                            <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span> {{ post.date }}
                         </div>
                         <div style="margin-top: 7px;">
-                            <span class="tag is-light">Rails</span>
+                            <span class="tag is-light" v-for="tag in post.tags">{{ tag }}</span>
                         </div>
                     </div>
                     <div class="column is-6">
                         <div class="blog-post-summary">
-                            <h3 class="title is-3">Rails Routes Insideout</h3>
-                            <p>哥十五年来每天长伞不离手，无论正常走路还是打着伞走都从来没有戳到过人或者伞尖碰到别人眼睛，可见修养之高[酷] 估计英国绅士们也有同感</p>
+                            <h3 class="title is-3">{{ post.title }}</h3>
+                            <p>{{ p.summary }}</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,11 @@
 
 <script>
 export default {
-
+    computed: {
+        posts () {
+            return this.$store.getters.allPosts
+        }
+    }
 }
 </script>
 

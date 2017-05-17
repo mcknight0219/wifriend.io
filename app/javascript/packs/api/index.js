@@ -19,5 +19,9 @@ export default {
         request('POST', '/api/v1/accesstoken', JSON.stringify({
             accesstoken: token
         }))
+    },
+
+    allPosts () {
+        request('GET', '/api/v1/posts').then(resp => resp.json())
     }
 }

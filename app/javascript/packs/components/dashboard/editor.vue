@@ -9,7 +9,7 @@
                             <button class="delete" @click="closeNotice"></button>
                         </div>
                         <div class="message-body">
-                            题目或文章内容不能为空
+                            {{ errorMessage }}
                         </div>
                     </article>
                     <div class="field">
@@ -45,19 +45,19 @@
                             </div>
                         </div>
                     </nav>
-                    <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden; height: 560px;">
+                    <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden;">
                         <div v-bind:class="{ 'editor-preview-active': isPreview }" class="editor-preview CodeMirror" v-html="previewHtml">
                         </div>
+                        
                     </div>
-    
                     <div class="field is-grouped" style="margin-top: 35px;">
-                        <p class="control">
-                            <button class="button is-primary" @click="publish">发布</button>
-                        </p>
-                        <p class="control">
-                            <button class="button is-link">取消</button>
-                        </p>
-                    </div>
+                            <p class="control">
+                                <button class="button is-primary" @click="publish">发布</button>
+                            </p>
+                            <p class="control">
+                                <button class="button is-link">取消</button>
+                            </p>
+                        </div>
                 </div>
             </div>
         </div>
@@ -81,8 +81,26 @@ export default {
         return {
             title: '',
             hasError: false,
+            errorMessage: '',
             isPreview: false,
             previewHtml: ''
+        }
+    },
+
+    computed: {
+        publishStatus () {
+            return this.$store.getters.publishStatus
+        }
+    },
+
+    watch: {
+        publishStatus (value) {
+            if (this.publishStatus === 'success') {
+
+            } else if (this.publishStatus === 'failure') {
+                this.hasError = true
+                this.errorMessage = '无法发布，请稍后重试。'
+            }
         }
     },
 
@@ -93,8 +111,11 @@ export default {
 
             if (title.length === 0 || text.length === 0) {
                 this.hasError = true
+                this.errorMessage = '题目或文章内容不能为空'
                 return
             }
+
+            this.$store.dispatch('publishPost', {title: title, content: text, date: new Date()})
         },
 
         closeNotice() {
@@ -110,7 +131,7 @@ export default {
             const cm = this.editor
             let cursor = cm.getCursor()
             const curLine = cm.getLine(cursor.line)
-            cm.replaceRange("> " + curLine, {line: cursor.line, ch: 0}, {line: cursor.line, ch: curLine.length})
+            cm.replaceRange("> " + curLine, { line: cursor.line, ch: 0 }, { line: cursor.line, ch: curLine.length })
             cm.focus()
         },
 
@@ -189,7 +210,6 @@ export default {
 }
 
 .editor-wrapper {
-
     h1,
     h2,
     h3,
@@ -205,7 +225,10 @@ export default {
     h3 {
         font-size: 1.15em;
     }
-    blockquote, ul, ol, li {
+    blockquote,
+    ul,
+    ol,
+    li {
         -webkit-margin-before: 1em;
         -webkit-margin-after: 1em;
         -webkit-margin-start: 40px;

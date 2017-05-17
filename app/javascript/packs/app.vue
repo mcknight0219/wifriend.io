@@ -71,6 +71,10 @@ export default {
     toggleDropdown(opened) {
       this.$store.dispatch('toggleDropdown', opened)
     }
+  },
+  
+  created () {
+    this.$store.dispatch('getAllPosts')
   }
 }
 </script>
