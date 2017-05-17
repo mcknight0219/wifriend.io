@@ -191,6 +191,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bulma/sass/utilities/mixins";
+
+@media screen and (max-width: 768px)  {
+    .section {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
 .editor-preview {
     position: absolute;
     width: 100%;
