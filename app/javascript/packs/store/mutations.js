@@ -14,7 +14,7 @@ export default {
         }
     },
 
-    ADD_POST: (state, { post }) => {
+    ADD_POST: (state, post) => {
         state.posts.push(post)
     },
 

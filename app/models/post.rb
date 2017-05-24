@@ -5,6 +5,7 @@ class Post < ApplicationRecord
     end
     
     def tags
+        return [] if super.nil? 
         super.split(',').map { |s| s.strip }
     end
 

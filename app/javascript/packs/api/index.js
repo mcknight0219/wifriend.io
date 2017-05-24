@@ -1,35 +1,55 @@
 import 'whatwg-fetch'
 
-function request(method, path, body) {
+function csrfToken() {
+    const tags = document.getElementsByTagName("meta")
+    for (var i = 0; i < tags.length; i++) {
+        if (tags[i].name === 'csrf-token') {
+            return tags[i].getAttribute('content')
+        }
+    }
+    return ''
+}
+
+function POST(path, body) {
     return fetch(path, {
-        method: method,
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-Token': csrfToken()
         },
         credentials: 'same-origin',
-        body: body === undefined ? '' : JSON.stringify(body)
+        body: body
     }).then(response => response.json())
 }
 
+function GET(path) {
+    return fetch(path, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    }).then(response => response.json())
+}
 
 // Login using provided token
 export function login(token) {
-    return request('POST', '/api/v1/accesstoken', {
+    return POST('/api/v1/accesstoken', {
         accesstoken: token
     })
 }
 
 export function allPosts() {
-    return request('GET', '/api/v1/posts')
+    return GET('/api/v1/posts')
 }
 
 export function newPost(title, content, tags) {
-    debugger
-    return request('POST', '/api/v1/posts', {
-        title,
-        content,
-        tags
-    })
+    return POST('/api/v1/posts', JSON.stringify({
+        post: {
+            title,
+            content,
+            tags
+        }
+    }))
 }

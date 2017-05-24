@@ -2,7 +2,7 @@
     <section class="section" style="padding-top: 0;">
         <div class="fluid-container">
             <div class="columns">
-                <div class="column is-8 is-offset-2">
+                <div class="column is-10 is-offset-1">
                     <article class="message is-danger" v-if="hasError">
                         <div class="message-header">
                             <p>警告</p>
@@ -61,11 +61,10 @@
                     </div>
                     <div class="field has-addons" style="margin-top: 15px;">
                         <p class="control">
-                            <input class="input" type="text" placeholder="新的标签">
+                            <input class="input" type="text" placeholder="新的标签" @keyup.enter="addTag" v-model="newTag">
                         </p>
-                        <p class="control is-expanded"><a class="button is-primary">添加</a></p>
                     </div>
-                    <span class="tag is-light" v-for="tag in tags">{{ tag }} </span>
+                    <span class="tag is-light" v-for="tag in tags">{{ tag }} <button class="delete is-small" @click="removeTag(tag)"></button></span>
                     <div class="field is-grouped" style="margin-top: 35px;">
                             <p class="control">
                                 <button class="button is-primary" @click="publish">发布</button>
@@ -100,7 +99,8 @@ export default {
             errorMessage: '',
             isPreview: false,
             previewHtml: '',
-            tags: ['javascript', 'vue']
+            tags: [],
+            newTag: ''
         }
     },
 
@@ -129,6 +129,19 @@ export default {
             return this.title.split('-')[1].trim()
         },
 
+        addTag() {
+            const tag = this.newTag.trim()
+            if (tag.length > 0 && this.tags.indexOf(tag) < 0 ) {
+                this.tags.push(tag)
+                this.newTag = ''
+            }
+        },
+
+        removeTag(tag) {
+            const idx = this.tags.indexOf(tag)
+            this.tags.splice(idx, 1)
+        },
+
         publish() {
             const text = this.editor.getValue()
             const title = this.title
@@ -144,9 +157,10 @@ export default {
             if (idx < 0 || idx === title.length) {
                 this.hasError = true
                 this.errorMessage = '题目必须包含 \'-\' '
+                return
             } 
 
-            this.$store.dispatch('newPost', {title: title, content: text, tags: this.tags})
+            this.$store.dispatch('newPost', {title: title, content: text, tags: this.tags.join(',')})
         },
 
         closeNotice() {
