@@ -12,6 +12,16 @@
                             {{ errorMessage }}
                         </div>
                     </article>
+                    <article class="message is-success" v-if="publishStatus === 'success'">
+                        <div class="message-header">
+                            <p>发布成功</p>
+                            <button class="delete" @click="closeNotice"></button>
+                        </div>
+                        <div class="message-body">
+                            现在就去查看 
+                            <router-link :to="{ name: 'post', params: { year: '2017', month: '01', day: '01', title: 'hello world' }}"></router-link>
+                        </div>
+                    </article>
                     <div class="field">
                         <p class="control">
                             <input class="input" type="text" placeholder="题目 - English title for friendly url" v-model="title">
@@ -48,8 +58,14 @@
                     <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden;">
                         <div v-bind:class="{ 'editor-preview-active': isPreview }" class="editor-preview CodeMirror" v-html="previewHtml">
                         </div>
-                        
                     </div>
+                    <div class="field has-addons" style="margin-top: 15px;">
+                        <p class="control">
+                            <input class="input" type="text" placeholder="新的标签">
+                        </p>
+                        <p class="control is-expanded"><a class="button is-primary">添加</a></p>
+                    </div>
+                    <span class="tag is-light" v-for="tag in tags">{{ tag }} </span>
                     <div class="field is-grouped" style="margin-top: 35px;">
                             <p class="control">
                                 <button class="button is-primary" @click="publish">发布</button>
@@ -83,7 +99,8 @@ export default {
             hasError: false,
             errorMessage: '',
             isPreview: false,
-            previewHtml: ''
+            previewHtml: '',
+            tags: ['javascript', 'vue']
         }
     },
 
@@ -105,17 +122,31 @@ export default {
     },
 
     methods: {
+        indexableTitle () {
+            if (this.title.indexOf('-') < 0) {
+                return ''
+            }
+            return this.title.split('-')[1].trim()
+        },
+
         publish() {
             const text = this.editor.getValue()
             const title = this.title
+            const tags = this.tags
 
             if (title.length === 0 || text.length === 0) {
                 this.hasError = true
                 this.errorMessage = '题目或文章内容不能为空'
                 return
             }
+            // Check the title, must contain indexable part
+            let idx = title.indexOf('-')
+            if (idx < 0 || idx === title.length) {
+                this.hasError = true
+                this.errorMessage = '题目必须包含 \'-\' '
+            } 
 
-            this.$store.dispatch('publishPost', {title: title, content: text, date: new Date()})
+            this.$store.dispatch('newPost', {title: title, content: text, tags: this.tags})
         },
 
         closeNotice() {

@@ -16,5 +16,9 @@ export default {
 
     ADD_POST: (state, { post }) => {
         state.posts.push(post)
+    },
+
+    SET_PUBLISH_STATUS: (state, status) => {
+        state.publishStatus = status
     }
 }

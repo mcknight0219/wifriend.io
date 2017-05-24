@@ -8,6 +8,7 @@ class PostsController < ApplicationController
     end
     
     def create
+        byebug
         Post.create post_params
     end
     

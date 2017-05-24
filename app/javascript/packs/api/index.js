@@ -9,19 +9,27 @@ function request(method, path, body) {
             'X-CSRF-Token': csrfToken()
         },
         credentials: 'same-origin',
-        body: body
+        body: body === undefined ? '' : JSON.stringify(body)
+    }).then(response => response.json())
+}
+
+
+// Login using provided token
+export function login(token) {
+    return request('POST', '/api/v1/accesstoken', {
+        accesstoken: token
     })
 }
 
-export default {
-    // Login using provided token
-    login(token) {
-        request('POST', '/api/v1/accesstoken', JSON.stringify({
-            accesstoken: token
-        }))
-    },
+export function allPosts() {
+    return request('GET', '/api/v1/posts')
+}
 
-    allPosts () {
-        request('GET', '/api/v1/posts').then(resp => resp.json())
-    }
+export function newPost(title, content, tags) {
+    debugger
+    return request('POST', '/api/v1/posts', {
+        title,
+        content,
+        tags
+    })
 }
