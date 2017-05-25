@@ -33,6 +33,18 @@ function GET(path) {
     }).then(response => response.json())
 }
 
+function DELETE(path) {
+    return fetch(path, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': csrfToken()
+        },
+        credentials: 'same-origin'
+    }).then(response => response.json())
+}
+
 // Login using provided token
 export function login(token) {
     return POST('/api/v1/accesstoken', {
@@ -52,4 +64,8 @@ export function newPost(title, content, tags) {
             tags
         }
     }))
+}
+
+export function deletePost(id) {
+    return DELETE('/api/v1/posts/' + id)
 }

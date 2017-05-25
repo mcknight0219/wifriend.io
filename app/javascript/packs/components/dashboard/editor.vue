@@ -2,7 +2,7 @@
     <section class="section" style="padding-top: 0;">
         <div class="fluid-container">
             <div class="columns">
-                <div class="column is-10 is-offset-1">
+                <div class="column is-6 is-offset-3">
                     <article class="message is-danger" v-if="hasError">
                         <div class="message-header">
                             <p>警告</p>
@@ -24,9 +24,10 @@
                     </article>
                     <div class="field">
                         <p class="control">
-                            <input class="input" type="text" placeholder="题目 - English title for friendly url" v-model="title">
+                            <input class="input" type="text" placeholder="题目" v-model="title">
                         </p>
                     </div>
+                    <div id="wrapper">
                     <nav class="level is-mobile" style="margin-bottom: 0;">
                         <div class="level-left">
                             <div class="level-item">
@@ -58,6 +59,7 @@
                     <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden;">
                         <div v-bind:class="{ 'editor-preview-active': isPreview }" class="editor-preview CodeMirror" v-html="previewHtml">
                         </div>
+                    </div>
                     </div>
                     <div class="field has-addons" style="margin-top: 15px;">
                         <p class="control">
@@ -188,7 +190,7 @@ export default {
         },
 
         toggleFullscreen() {
-            const el = document.getElementById("editor")
+            const el = this.editor.getWrapperElement()
             const isFull = document.isFull || document.mozFullScreen || document.webkitIsFullScreen
 
             const requestFull = () => {
@@ -291,7 +293,19 @@ export default {
 }
 
 .CodeMirror {
-    height: 480px;
     font-family: "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+}
+
+:-webkit-full-screen {
+  background: #f9f9f5;
+  padding: 0.5em 1em;
+  width: 100%;
+  height: 100%;
+}
+:-moz-full-screen {
+  padding: 0.5em 1em;
+  background: #f9f9f5;
+  width: 100%;
+  height: 100%;
 }
 </style>

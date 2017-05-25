@@ -1,4 +1,4 @@
-import { allPosts, newPost } from '../api'
+import { allPosts, newPost, deletePost } from '../api'
 export default {
     toggleDropdown: ({commit}, opened) => {
         commit('TOGGLE_DROPDOWN', opened)
@@ -21,5 +21,13 @@ export default {
             commit('ADD_POST', post)
             commit('SET_PUBLISH_STATUS', 'success')
         })        
+    },
+
+    deletePost: ({commit}, { id}) => {
+        deletePost(id).then(({success}) => {
+            if (success) {
+                commit('DELETE_POST', { id })
+            }
+        })
     }
 }

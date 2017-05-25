@@ -16,6 +16,7 @@ module Api
             
             def destroy
                 Post.find(params[:id]).delete
+                render :json => {success: true}
             end
 
             def post_params

@@ -2,7 +2,7 @@
     <section class="section" style="padding-top: 0;">
         <div class="fluid-container">
             <div class="columns">
-                <div class="column is-4 is-offset-4">
+                <div class="column is-6 is-offset-3">
                     <nav class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item">

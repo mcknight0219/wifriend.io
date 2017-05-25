@@ -2,14 +2,17 @@
     <section class="section" style="padding-top: 0;">
         <div class="fluid-container">
             <div class="columns">
-                <div class="column is-8 is-offset-2">
+                <div class="column is-6 is-offset-3">
                     <ul class="article-list">
                         <li v-for="post in posts">
                             <router-link :to="{ name: 'post', params: { year: year(post.created_at), month: month(post.created_at), day: day(post.created_at), title: seoTitle(post.title) }}">
                                 <div class="article-title">{{ readableTitle(post.title) }} <span class="tag is-light">草稿</span></div>
                                 <div class="subtitle">
                                     <a href="" class="is-link" style="color: gray">编辑</a>
-                                    <a href="" class="is-link" style="color: red; margin-left: 7px;">删除</a>
+                                    
+                                    <a class="is-link" @click.prevent="deletePost(post)" style="margin-left: 6px;">
+                                        删除
+                                    </a>
                                     <span class="pull-right">{{ formatDate(post.created_at) }}</span>
                                 </div>
                             </router-link>
@@ -53,6 +56,10 @@ export default {
 
         seoTitle(t) {
             return t.split('-')[1].trim()
+        },
+
+        deletePost(post) {
+            this.$store.dispatch('deletePost', { id: post.id })
         }
     }
 }
@@ -62,7 +69,7 @@ export default {
     .article-list {
         list-style: none;
         li {
-            padding: 15px 8px;
+            padding: 35px 8px;
 
             .article-title {
                 color: black;
