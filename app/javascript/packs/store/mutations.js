@@ -8,7 +8,6 @@ export default {
     },
 
     DELETE_POST: (state, { id }) => {
-        debugger
         const index = state.posts.findIndex(p =>  p.id === id )
         if (index !== -1) {
             state.posts.splice(index, 1)

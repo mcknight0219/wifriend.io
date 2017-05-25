@@ -24,7 +24,12 @@
                     </article>
                     <div class="field">
                         <p class="control">
-                            <input class="input" type="text" placeholder="题目" v-model="title">
+                            <input class="input" type="text" placeholder="请输入题目" v-model="title">  
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <input class="input is-small" type="text" placeholder="请输入SEO标题" v-model="seoTitle" >
                         </p>
                     </div>
                     <div id="wrapper">
@@ -34,10 +39,10 @@
                                 <a class="button is-white" @click="togglePreview" v-bind:class="{ 'is-active': isPreview }">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>
-                                <a class="button is-white" @click="replaceWithOl">
+                                <a class="button is-white" @click="toggleOl">
                                     <i class="fa fa-list-ol" aria-hidden="true"></i>
                                 </a>
-                                <a class="button is-white">
+                                <a class="button is-white" @click="toggleUl">
                                     <i class="fa fa-list-ul" aria-hidden="true"></i>
                                 </a>
                                 <a class="button is-white" @click="toggleQuote">
@@ -97,6 +102,7 @@ export default {
     data() {
         return {
             title: '',
+            seoTitle: '',
             hasError: false,
             errorMessage: '',
             isPreview: false,
@@ -124,13 +130,6 @@ export default {
     },
 
     methods: {
-        indexableTitle () {
-            if (this.title.indexOf('-') < 0) {
-                return ''
-            }
-            return this.title.split('-')[1].trim()
-        },
-
         addTag() {
             const tag = this.newTag.trim()
             if (tag.length > 0 && this.tags.indexOf(tag) < 0 ) {
@@ -147,22 +146,16 @@ export default {
         publish() {
             const text = this.editor.getValue()
             const title = this.title
+            const seoTitle = this.seoTitle
             const tags = this.tags
 
-            if (title.length === 0 || text.length === 0) {
+            if (title.length === 0 || text.length === 0 || seoTitle.length === 0) {
                 this.hasError = true
                 this.errorMessage = '题目或文章内容不能为空'
                 return
             }
-            // Check the title, must contain indexable part
-            let idx = title.indexOf('-')
-            if (idx < 0 || idx === title.length) {
-                this.hasError = true
-                this.errorMessage = '题目必须包含 \'-\' '
-                return
-            } 
 
-            this.$store.dispatch('newPost', {title: title, content: text, tags: this.tags.join(',')})
+            this.$store.dispatch('newPost', {title: title + '-' + seoTitle, content: text, tags: this.tags.join(',')})
         },
 
         closeNotice() {
@@ -170,8 +163,12 @@ export default {
         },
 
         // Replace current line with ordered list
-        replaceWithOl() {
+        toggleOl() {
             const cm = this.editor
+        },
+
+        toggleUl() {
+
         },
 
         toggleQuote() {

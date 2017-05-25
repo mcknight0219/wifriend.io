@@ -4,21 +4,20 @@
             <div class="fluid-container">
                 <div class="columns">
                     <div class="column is-4 is-offset-4">
-                        <h2 class="title is-2" style="font-weight: 400">{{ post.title }}</h2>
+                        <h2 class="title is-2" style="font-weight: 400">{{ title }}</h2>
                         <nav class="level is-mobile">
                             <div class="level-left">
                                 <div class="level-item">
-                                    <span style="color: gray">{{ post.created_at}}</span>
+                                    <span style="color: gray">{{ date }}</span>
                                 </div>
                             </div>
                             <div class="level-right">
                                 <div class="level-item">
-                                    <span class="tag is-light" v-for="tag in post.tags">{{ tag }}</span>
+                                    <span class="tag is-light" v-for="tag in tags">{{ tag }}</span>
                                 </div>
                             </div>
                         </nav>
-                        <div class="content">
-                            {{ post.content }}
+                        <div class="content" v-html="content">
                         </div>
                     </div>
                 </div>
@@ -28,10 +27,38 @@
 </template>
 
 <script>
+var marked = require('marked')
+import * as hljs from 'highlightjs'
+
 export default {
     computed: {
         post () {
             return this.queryPost(this.$route.params)[0]
+        },
+
+        title () {
+            if (this.post !== undefined) {
+                return this.post.title.split('-')[0].trim()
+            }
+        },
+
+        content () {
+            if (this.post !== undefined) {
+                return marked(this.post.content)
+            }
+        },
+
+        tags () {
+            if (this.post !== undefined) {
+                return this.post.tags
+            }
+            return []
+        },
+
+        date () {
+            if (this.post !== undefined) {
+                return new Date(this.post.created_at).toDateString().substring(4)
+            }
         }
     },
 
@@ -47,10 +74,17 @@ export default {
         seoTitle(t) {
             return t.split('-')[1].trim()
         }
+    },
+
+    updated () {
+        this.$nextTick(function () {
+            hljs.initHighlighting()
+        })
+        
     }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import "~highlightjs/styles/default"
 </style>
