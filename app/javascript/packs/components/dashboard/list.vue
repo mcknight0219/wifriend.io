@@ -8,8 +8,7 @@
                             <router-link :to="{ name: 'post', params: { year: year(post.created_at), month: month(post.created_at), day: day(post.created_at), title: seoTitle(post.title) }}">
                                 <div class="article-title">{{ readableTitle(post.title) }} <span class="tag is-light">草稿</span></div>
                                 <div class="subtitle">
-                                    <a href="" class="is-link" style="color: gray">编辑</a>
-                                    
+                                    <a class="is-link" style="color: gray" @click.prevent="editPost(post)">编辑</a>
                                     <a class="is-link" @click.prevent="deletePost(post)" style="margin-left: 6px;">
                                         删除
                                     </a>
@@ -60,6 +59,10 @@ export default {
 
         deletePost(post) {
             this.$store.dispatch('deletePost', { id: post.id })
+        },
+
+        editPost(post) {
+            this.$emit('edit', post)
         }
     }
 }

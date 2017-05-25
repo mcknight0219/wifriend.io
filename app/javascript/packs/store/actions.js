@@ -1,4 +1,4 @@
-import { allPosts, newPost, deletePost } from '../api'
+import { allPosts, newPost, deletePost, updatePost } from '../api'
 export default {
     toggleDropdown: ({commit}, opened) => {
         commit('TOGGLE_DROPDOWN', opened)
@@ -21,6 +21,18 @@ export default {
             commit('ADD_POST', post)
             commit('SET_PUBLISH_STATUS', 'success')
         })        
+    },
+
+    updatePost: ({commit}, {id, title, content, tags}) => {
+        updatePost(id, title, content, tags).then(({post}) => {
+            if (post === undefined) {
+                commit('SET_PUBLISH_STATUS', 'failed')
+                return
+            }
+
+            commit('UPDATE_POST', post)
+            commit('SET_PUBLISH_STATUS', 'success')
+        })
     },
 
     deletePost: ({commit}, { id}) => {

@@ -18,6 +18,14 @@ export default {
         state.posts.push(post)
     },
 
+    UPDATE_POST: (state, post) => {
+        const index = state.posts.findIndex(p => p.id === post.id)
+        if (index !== -1) {
+            state.posts.splice(index, 1)
+            state.posts.unshift(post)
+        }
+    },
+
     SET_PUBLISH_STATUS: (state, status) => {
         state.publishStatus = status
     }

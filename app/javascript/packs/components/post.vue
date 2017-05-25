@@ -3,7 +3,7 @@
         <section class="section">
             <div class="fluid-container">
                 <div class="columns">
-                    <div class="column is-4 is-offset-4">
+                    <div class="column is-6 is-offset-3">
                         <h2 class="title is-2" style="font-weight: 400">{{ title }}</h2>
                         <nav class="level is-mobile">
                             <div class="level-left">

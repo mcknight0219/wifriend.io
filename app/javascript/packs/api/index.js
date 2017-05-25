@@ -45,6 +45,19 @@ function DELETE(path) {
     }).then(response => response.json())
 }
 
+function PATCH(path, body) {
+    return fetch(path, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': csrfToken()
+        },
+        credentials: 'same-origin',
+        body: body
+    }).then(response => response.json())
+}
+
 // Login using provided token
 export function login(token) {
     return POST('/api/v1/accesstoken', {
@@ -58,6 +71,16 @@ export function allPosts() {
 
 export function newPost(title, content, tags) {
     return POST('/api/v1/posts', JSON.stringify({
+        post: {
+            title,
+            content,
+            tags
+        }
+    }))
+}
+
+export function updatePost(id, title, content, tags) {
+    return PATCH('/api/v1/posts/' + id, JSON.stringify({
         post: {
             title,
             content,

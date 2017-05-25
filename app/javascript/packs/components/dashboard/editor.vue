@@ -74,7 +74,8 @@
                     <span class="tag is-light" v-for="tag in tags">{{ tag }} <button class="delete is-small" @click="removeTag(tag)"></button></span>
                     <div class="field is-grouped" style="margin-top: 35px;">
                             <p class="control">
-                                <button class="button is-primary" @click="publish">发布</button>
+                                <button v-if="newPost" class="button is-primary" @click="publish">发布</button>
+                                <button v-else class="button is-primary" @click="save">保存更改</button>
                             </p>
                             <p class="control">
                                 <button class="button is-link">取消</button>
@@ -93,8 +94,8 @@ import 'codemirror/mode/markdown/markdown'
 
 export default {
     props: {
-        value: {
-            type: String,
+        post: {
+            type: Object,
             required: false
         }
     },
@@ -115,6 +116,10 @@ export default {
     computed: {
         publishStatus () {
             return this.$store.getters.publishStatus
+        },
+
+        newPost () {
+            return this.post.id === undefined
         }
     },
 
@@ -158,13 +163,27 @@ export default {
             this.$store.dispatch('newPost', {title: title + '-' + seoTitle, content: text, tags: this.tags.join(',')})
         },
 
+        save() {
+            const text = this.editor.getValue()
+            const title = this.title
+            const seoTitle = this.seoTitle
+            const tags = this.tags
+
+            if (title.length === 0 || text.length === 0 || seoTitle.length === 0) {
+                this.hasError = true
+                this.errorMessage = '题目或文章内容不能为空'
+                return
+            }
+
+            this.$store.dispatch('updatePost', {id: this.post.id, title: title + '-' + seoTitle, content: text, tags: this.tags.join(',')})
+        },
+
         closeNotice() {
             this.hasError = false
         },
 
-        // Replace current line with ordered list
         toggleOl() {
-            const cm = this.editor
+
         },
 
         toggleUl() {
@@ -216,7 +235,7 @@ export default {
 
     mounted() {
         this.editor = CodeMirror(document.getElementById("editor"), {
-            value: this.value,
+            value: this.post.content,
             mode: 'markdown',
             theme: 'dracula',
             tabSize: '2',
@@ -230,6 +249,13 @@ export default {
                 'Shift-Tab': ''
             }
         })
+
+        // we are editing exisiting post
+        if (this.post.id !== undefined) {
+            this.title = this.post.title.split('-')[0].trim()
+            this.seoTitle = this.post.title.split('-')[1].trim()
+            this.tags = this.post.tags
+        }
     }
 }
 </script>

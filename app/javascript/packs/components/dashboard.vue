@@ -2,7 +2,7 @@
     <div>
         <section class="section">
             <div class="container">
-                <div class="tabs">
+                <div class="tabs is-centered">
                     <ul>
                         <li v-bind:class="{'is-active': allActive}">
                             <a @click="activate('all')">
@@ -12,12 +12,12 @@
                                 <span>列表</span>
                             </a>
                         </li>
-                        <li v-bind:class="{'is-active': newActive}">
-                            <a @click="activate('new')">
+                        <li v-bind:class="{'is-active': editActive}">
+                            <a @click="activate('edit')">
                                 <span class="icon">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
-                                <span>新文章</span>
+                                <span>编辑文章</span>
                             </a>
                         </li>
                         <li v-bind:class="{'is-active': settingActive}">
@@ -30,8 +30,8 @@
                         </li>
                     </ul>
                 </div>
-                <Editor value="" v-if="tab === 'new'"></Editor>
-                <List v-if="tab === 'all'"></List>
+                <Editor :post="post" v-if="tab === 'edit'"></Editor>
+                <List v-if="tab === 'all'" @edit="editPost"></List>
                 <Setting v-if="tab === 'setting'"></Setting>
             </div>
         </section>
@@ -55,8 +55,8 @@ export default {
             return this.tab === 'all'
         },
 
-        newActive() {
-            return this.tab === 'new'
+        editActive() {
+            return this.tab === 'edit'
         },
 
         settingActive() {
@@ -66,13 +66,24 @@ export default {
 
     data() {
         return {
-            tab: 'all'
+            tab: 'all',
+            post: {
+                title: '',
+                seoTitle: '',
+                content: '',
+                tags: []
+            }
         }
     },
 
     methods: {
         activate(tab) {
             this.tab = tab
+        },
+
+        editPost(post) {
+            this.tab = 'edit'
+            this.post = post
         }
     }
 }
