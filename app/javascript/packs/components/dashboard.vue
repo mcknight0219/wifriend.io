@@ -2,7 +2,7 @@
     <div>
         <section class="section">
             <div class="container">
-                <div class="tabs is-centered">
+                <div class="tabs">
                     <ul>
                         <li v-bind:class="{'is-active': allActive}">
                             <a @click="activate('all')">
