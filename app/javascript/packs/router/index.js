@@ -11,8 +11,8 @@ import Post from '../components/post'
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/',     redirect:    '/home' },
-    { path: '/home', name: 'home', component:   Home },
+    { path: '/',     redirect:    '/blog' },
+    { path: '/home', name: 'home', component:   Blog },
     { path: '/blog', name: 'blog', component:   Blog },
     { path: '/resume', name: 'resume', component: Resume },
     { path: '/about', name: 'about', component:  About },
