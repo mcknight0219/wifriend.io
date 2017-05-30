@@ -78,7 +78,7 @@
                                 <button v-else class="button is-primary" @click="save">保存更改</button>
                             </p>
                             <p class="control">
-                                <button class="button is-link">取消</button>
+                                <button v-if="!newPost" class="button is-link" @click="cancel">取消</button>
                             </p>
                         </div>
                 </div>
@@ -178,6 +178,11 @@ export default {
             this.$store.dispatch('updatePost', {id: this.post.id, title: title + '-' + seoTitle, content: text, tags: this.tags.join(',')})
         },
 
+        // Clear state
+        cancel() {
+            this.post = {}
+        },
+
         closeNotice() {
             this.hasError = false
         },
@@ -237,7 +242,7 @@ export default {
         this.editor = CodeMirror(document.getElementById("editor"), {
             value: this.post.content,
             mode: 'markdown',
-            theme: 'dracula',
+            theme: 'elegant',
             tabSize: '2',
             indentWithTabs: true,
             lineNumbers: true,

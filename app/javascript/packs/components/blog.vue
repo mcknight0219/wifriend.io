@@ -13,7 +13,7 @@
                     </div>
                     <div class="column is-6">
                         <div class="blog-post-summary">
-                            <router-link :to="{ name: 'post', params: { year: getYear(post), month: getMonth(post), day: getDay(post), title: getSeoTitle(post) }}">
+                            <router-link :to="{ name: 'post', params: { year: getYear(post), month: getMonth(post), day: getDay(post), title: getSeoTitle(post).replace(/ +/g, '-') }}">
                                 <h3 class="title is-3">{{ getTitle(post) }}</h3>
                             </router-link>
                             

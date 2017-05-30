@@ -31,6 +31,16 @@ var marked = require('marked')
 import * as hljs from 'highlightjs'
 
 export default {
+    watch: {
+        content(data) {
+            debugger
+            this.$nextTick(function () {
+                hljs.initHighlighting.called = false
+                hljs.initHighlighting()
+            })
+        }
+    },
+
     computed: {
         post () {
             return this.queryPost(this.$route.params)[0]
@@ -68,7 +78,7 @@ export default {
             return posts.filter(p => new Date(p.created_at).getFullYear() === parseInt(year))
                 .filter(p => new Date(p.created_at).getMonth() === parseInt(month) - 1)
                 .filter(p => new Date(p.created_at).getDate() === parseInt(day))
-                .filter(p => this.seoTitle(p.title) === title)
+                .filter(p => this.seoTitle(p.title).replace(/ +/g, '-') === title)
         },
 
         seoTitle(t) {
@@ -76,11 +86,13 @@ export default {
         }
     },
 
+    mounted () {
+        hljs.initHighlightingOnLoad()
+    },
+
     updated () {
-        this.$nextTick(function () {
-            hljs.initHighlighting()
-        })
-        
+        debugger
+        hljs.initHighlighting()
     }
 }
 </script>
