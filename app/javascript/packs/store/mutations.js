@@ -28,5 +28,9 @@ export default {
 
     SET_PUBLISH_STATUS: (state, status) => {
         state.publishStatus = status
+    },
+
+    LOGIN_USER: (state) => {
+        state.login = true
     }
 }

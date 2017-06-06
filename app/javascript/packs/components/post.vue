@@ -33,7 +33,6 @@ import * as hljs from 'highlightjs'
 export default {
     watch: {
         content(data) {
-            debugger
             this.$nextTick(function () {
                 hljs.initHighlighting.called = false
                 hljs.initHighlighting()

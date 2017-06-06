@@ -15,6 +15,9 @@
           <router-link :to="{name: 'blog' }" class="nav-item is-tab" active-class="is-active">博客</router-link>
           <router-link :to="{name: 'resume'}" class="nav-item is-tab" active-class="is-active">简历</router-link>
           <router-link :to="{name: 'about'}" class="nav-item is-tab" active-class="is-active">关于</router-link>
+          <router-link :to="{name: 'login'}" class="nav-item" active-class="is-active">
+            <a class="button is-active">登陆</a>
+          </router-link>
         </div>
       </div>
     </nav>
@@ -43,6 +46,7 @@ import Home from './components/home'
 import Blog from './components/blog'
 import Resume from './components/resume'
 import About from './components/about'
+import Login from './components/login'
 import store from './store'
 
 export default {
@@ -52,7 +56,8 @@ export default {
     Home,
     Blog,
     Resume,
-    About
+    About,
+    Login
   },
 
   computed: {
@@ -75,6 +80,7 @@ export default {
   
   created () {
     this.$store.dispatch('getAllPosts')
+    this.$store.dispatch('checkAuth')
   }
 }
 </script>

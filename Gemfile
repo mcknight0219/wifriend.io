@@ -38,6 +38,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'ruby-debug-ide'
 gem 'debase'
 
+gem 'devise'
+gem 'jwt'
+
 # Use Capistrano for deployment
 group :development do
   gem 'capistrano-rails', '~> 1.2.3', group: :development

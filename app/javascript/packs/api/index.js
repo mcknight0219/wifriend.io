@@ -59,10 +59,10 @@ function PATCH(path, body) {
 }
 
 // Login using provided token
-export function login(token) {
-    return POST('/api/v1/accesstoken', {
-        accesstoken: token
-    })
+export function login(password) {
+    return POST('/api/v1/auth_user', JSON.stringify({
+        password: password
+    }))
 }
 
 export function allPosts() {

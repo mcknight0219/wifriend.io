@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         showDropdown: false,
-        signedIn: false,
+        login: false,
         posts: [],
         // other possible values are 'success' and 'failure' 
         publishStatus: 'draft'

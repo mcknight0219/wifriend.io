@@ -1,4 +1,4 @@
-import { allPosts, newPost, deletePost, updatePost } from '../api'
+import { allPosts, newPost, deletePost, updatePost, login } from '../api'
 export default {
     toggleDropdown: ({commit}, opened) => {
         commit('TOGGLE_DROPDOWN', opened)
@@ -41,5 +41,21 @@ export default {
                 commit('DELETE_POST', { id })
             }
         })
+    },
+
+    login: ({commit}, password) => {
+        login(password).then(({auth_token}) => {
+            debugger
+            if (auth_token !== undefined) {
+                window.localStorage.setItem('auth_token', auth_token)
+                commit('LOGIN_USER')
+            }
+        })
+    },
+
+    checkAuth: ({commit}) => {
+        if (window.localStorage.getItem('auth_token')) {
+            commit('LOGIN_USER')
+        }
     }
 }
