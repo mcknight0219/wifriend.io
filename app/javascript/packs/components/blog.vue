@@ -78,6 +78,11 @@ export default {
 </script>
 
 <style lang="scss">
-
+    .blog-post-summary {
+        padding: 10px 12px;
+        &:active {
+            background-color:lightgrey;
+        }
+    }
 </style>
 
