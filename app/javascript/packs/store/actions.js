@@ -45,12 +45,16 @@ export default {
 
     login: ({commit}, password) => {
         login(password).then(({auth_token}) => {
-            debugger
             if (auth_token !== undefined) {
                 window.localStorage.setItem('auth_token', auth_token)
                 commit('LOGIN_USER')
             }
         })
+    },
+
+    logout: ({commit}) => {
+        window.localStorage.removeItem('auth_token')
+        commit('LOGOUT_USER')
     },
 
     checkAuth: ({commit}) => {

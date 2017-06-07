@@ -15,72 +15,72 @@
                     <article class="message is-success" v-if="publishStatus === 'success'">
                         <div class="message-header">
                             <p>发布成功</p>
-                            <button class="delete" @click="closeNotice"></button>
                         </div>
                         <div class="message-body">
-                            现在就去查看 
-                            <router-link :to="{ name: 'post', params: { year: '2017', month: '01', day: '01', title: 'hello world' }}"></router-link>
+                            <router-link :to="{ name: 'list'}">现在就去查看</router-link>
                         </div>
                     </article>
                     <div class="field">
                         <p class="control">
-                            <input class="input" type="text" placeholder="请输入题目" v-model="title">  
+                            <input class="input" type="text" placeholder="请输入题目" v-model="title">
                         </p>
                     </div>
                     <div class="field">
                         <p class="control">
-                            <input class="input is-small" type="text" placeholder="请输入SEO标题" v-model="seoTitle" >
+                            <input class="input is-small" type="text" placeholder="请输入SEO标题" v-model="seoTitle">
                         </p>
                     </div>
                     <div id="wrapper">
-                    <nav class="level is-mobile" style="margin-bottom: 0;">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <a class="button is-white" @click="togglePreview" v-bind:class="{ 'is-active': isPreview }">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
-                                <a class="button is-white" @click="toggleOl">
-                                    <i class="fa fa-list-ol" aria-hidden="true"></i>
-                                </a>
-                                <a class="button is-white" @click="toggleUl">
-                                    <i class="fa fa-list-ul" aria-hidden="true"></i>
-                                </a>
-                                <a class="button is-white" @click="toggleQuote">
-                                    <i class="fa fa-quote-left"></i>
-                                </a>
-                                <a class="button is-white">
-                                    <i class="fa fa-code" aria-hidden="true"></i>
-                                </a>
+                        <nav class="level is-mobile" style="margin-bottom: 0;">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <a class="button is-white" @click="togglePreview" v-bind:class="{ 'is-active': isPreview }">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="button is-white" @click="toggleOl">
+                                        <i class="fa fa-list-ol" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="button is-white" @click="toggleUl">
+                                        <i class="fa fa-list-ul" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="button is-white" @click="toggleQuote">
+                                        <i class="fa fa-quote-left"></i>
+                                    </a>
+                                    <a class="button is-white">
+                                        <i class="fa fa-code" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <a class="button is-white" @click="toggleFullscreen">
+                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </nav>
+                        <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden;">
+                            <div v-bind:class="{ 'editor-preview-active': isPreview }" class="editor-preview CodeMirror" v-html="previewHtml">
                             </div>
                         </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <a class="button is-white" @click="toggleFullscreen">
-                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                    <div id="editor" class="editor-wrapper" style="position: relative; overflow: hidden;">
-                        <div v-bind:class="{ 'editor-preview-active': isPreview }" class="editor-preview CodeMirror" v-html="previewHtml">
-                        </div>
-                    </div>
                     </div>
                     <div class="field has-addons" style="margin-top: 15px;">
                         <p class="control">
                             <input class="input" type="text" placeholder="新的标签" @keyup.enter="addTag" v-model="newTag">
                         </p>
                     </div>
-                    <span class="tag is-light" v-for="tag in tags">{{ tag }} <button class="delete is-small" @click="removeTag(tag)"></button></span>
+                    <span class="tag is-light" v-for="tag in tags">{{ tag }}
+                        <button class="delete is-small" @click="removeTag(tag)"></button>
+                    </span>
                     <div class="field is-grouped" style="margin-top: 35px;">
-                            <p class="control">
-                                <button v-if="newPost" class="button is-primary" @click="publish">发布</button>
-                                <button v-else class="button is-primary" @click="save">保存更改</button>
-                            </p>
-                            <p class="control">
-                                <button v-if="!newPost" class="button is-link" @click="cancel">取消</button>
-                            </p>
-                        </div>
+                        <p class="control">
+                            <button v-if="mode === 'edit'" class="button is-primary" @click="save">保存修改</button>
+                            <button v-else class="button is-primary" @click="publish">发布</button>
+                        </p>
+                        <p class="control">
+                            <button class="button is-link" @click="cancel">取消</button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,12 +93,6 @@ import CodeMirror from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 
 export default {
-    props: {
-        post: {
-            type: Object,
-            required: false
-        }
-    },
 
     data() {
         return {
@@ -114,22 +108,35 @@ export default {
     },
 
     computed: {
-        publishStatus () {
+        publishStatus() {
             return this.$store.getters.publishStatus
         },
 
-        newPost () {
-            return this.post.id === undefined
+        mode() {
+            return (this.$route.params.id) ? 'edit' : 'new'
         }
     },
 
     watch: {
-        publishStatus (value) {
+        publishStatus(value) {
             if (this.publishStatus === 'success') {
-
+                setTimeout(() => {
+                    this.$store.commit('SET_PUBLISH_STATUS', 'draft')
+                }, 5000)
             } else if (this.publishStatus === 'failure') {
                 this.hasError = true
                 this.errorMessage = '无法发布，请稍后重试。'
+            }
+        },
+
+        '$route.params.id'(val) {
+            debugger
+            if (val === undefined) {
+                this.title = ''
+                this.seoTitle = ''
+                this.tags = []
+                this.editor.getDoc().setValue('')
+
             }
         }
     },
@@ -137,7 +144,7 @@ export default {
     methods: {
         addTag() {
             const tag = this.newTag.trim()
-            if (tag.length > 0 && this.tags.indexOf(tag) < 0 ) {
+            if (tag.length > 0 && this.tags.indexOf(tag) < 0) {
                 this.tags.push(tag)
                 this.newTag = ''
             }
@@ -160,7 +167,7 @@ export default {
                 return
             }
 
-            this.$store.dispatch('newPost', {title: title + '-' + seoTitle, content: text, tags: this.tags.join(',')})
+            this.$store.dispatch('newPost', { title: title + '-' + seoTitle, content: text, tags: this.tags.join(',') })
         },
 
         save() {
@@ -168,19 +175,16 @@ export default {
             const title = this.title
             const seoTitle = this.seoTitle
             const tags = this.tags
-
             if (title.length === 0 || text.length === 0 || seoTitle.length === 0) {
                 this.hasError = true
                 this.errorMessage = '题目或文章内容不能为空'
                 return
             }
-
-            this.$store.dispatch('updatePost', {id: this.post.id, title: title + '-' + seoTitle, content: text, tags: this.tags.join(',')})
+            this.$store.dispatch('updatePost', { id: this.$route.params.id, title: title + '-' + seoTitle, content: text, tags: this.tags.join(',') })
         },
 
-        // Clear state
         cancel() {
-            this.post = {}
+            this.$router.push({ name: 'list' })
         },
 
         closeNotice() {
@@ -240,12 +244,11 @@ export default {
 
     mounted() {
         this.editor = CodeMirror(document.getElementById("editor"), {
-            value: this.post.content,
+            value: '',
             mode: 'markdown',
-            theme: 'elegant',
+            theme: 'zenburn',
             tabSize: '2',
             indentWithTabs: true,
-            lineNumbers: true,
             lineWrapping: true,
             autofocus: true,
             extraKeys: {
@@ -255,11 +258,13 @@ export default {
             }
         })
 
-        // we are editing exisiting post
-        if (this.post.id !== undefined) {
-            this.title = this.post.title.split('-')[0].trim()
-            this.seoTitle = this.post.title.split('-')[1].trim()
-            this.tags = this.post.tags
+        if (this.mode === 'edit') {
+            const id = this.$route.params.id
+            const post = this.$store.getters.allPosts.find((e) => e.id === id)
+            if (!post) return
+            [this.title, this.seoTitle] = post.title.split('-').map((e) => e.trim())
+            this.tags = post.tags
+            this.editor.getDoc().setValue(post.content)
         }
     }
 }
@@ -268,7 +273,7 @@ export default {
 <style lang="scss">
 @import "~bulma/sass/utilities/mixins";
 
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 768px) {
     .section {
         padding-left: 5px;
         padding-right: 5px;
@@ -325,15 +330,16 @@ export default {
 }
 
 :-webkit-full-screen {
-  background: #f9f9f5;
-  padding: 0.5em 1em;
-  width: 100%;
-  height: 100%;
+    background: #f9f9f5;
+    padding: 0.5em 1em;
+    width: 100%;
+    height: 100%;
 }
+
 :-moz-full-screen {
-  padding: 0.5em 1em;
-  background: #f9f9f5;
-  width: 100%;
-  height: 100%;
+    padding: 0.5em 1em;
+    background: #f9f9f5;
+    width: 100%;
+    height: 100%;
 }
 </style>

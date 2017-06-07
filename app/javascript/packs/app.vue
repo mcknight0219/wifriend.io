@@ -16,7 +16,7 @@
           <router-link :to="{name: 'resume'}" class="nav-item is-tab" active-class="is-active">简历</router-link>
           <router-link :to="{name: 'about'}" class="nav-item is-tab" active-class="is-active">关于</router-link>
           <router-link :to="{name: 'login'}" class="nav-item" active-class="is-active">
-            <a class="button is-active">登陆</a>
+            <a class="button is-active">{{ !isLogin ? '登陆' : '登出' }}</a>
           </router-link>
         </div>
       </div>
@@ -63,6 +63,10 @@ export default {
   computed: {
     showDropdown() {
       return this.$store.getters.dropdown
+    },
+
+    isLogin() {
+      return this.$store.getters.login
     }
   },
 

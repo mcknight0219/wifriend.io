@@ -40,6 +40,7 @@ gem 'debase'
 
 gem 'devise'
 gem 'jwt'
+gem 'capistrano-rails-console', require: false
 
 # Use Capistrano for deployment
 group :development do

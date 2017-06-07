@@ -8,7 +8,7 @@
                         <nav class="level is-mobile">
                             <div class="level-left">
                                 <div class="level-item">
-                                    <span style="color: gray">{{ date }}</span>
+                                    <span style="color: gray; font-family:'Optima';">{{ date }}</span>
                                 </div>
                             </div>
                             <div class="level-right">

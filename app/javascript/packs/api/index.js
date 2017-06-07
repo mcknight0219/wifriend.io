@@ -39,7 +39,8 @@ function DELETE(path) {
         headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': csrfToken()
+            'X-CSRF-Token': csrfToken(),
+            'Authorization': 'Basic ' + getJwt()
         },
         credentials: 'same-origin'
     }).then(response => response.json())
@@ -51,11 +52,16 @@ function PATCH(path, body) {
         headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': csrfToken()
+            'X-CSRF-Token': csrfToken(),
+            'Authorization': 'Basic ' + getJwt()
         },
         credentials: 'same-origin',
         body: body
     }).then(response => response.json())
+}
+
+function getJwt() {
+    return window.localStorage.getItem('auth_token')
 }
 
 // Login using provided token

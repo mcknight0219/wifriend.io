@@ -32,5 +32,9 @@ export default {
 
     LOGIN_USER: (state) => {
         state.login = true
+    },
+
+    LOGOUT_USER: (state) => {
+        state.login = false
     }
 }

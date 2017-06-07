@@ -4,36 +4,33 @@
             <div class="container">
                 <div class="tabs is-centered">
                     <ul>
-                        <li v-bind:class="{'is-active': newActive}">
-                            <a @click="activate('new')">
+                        <li>
+                            <router-link :to="{name: 'new'}" class="nav-item is-tab" active-class="is-active">
                                 <span class="icon">
                                     <i class="fa fa-plus"></i>
                                 </span>
                                 <span>新文章</span>
-                            </a>
+                            </router-link>
                         </li>
-                        <li v-bind:class="{'is-active': allActive}">
-                            <a @click="activate('all')">
+                        <li>
+                            <router-link :to="{name: 'list'}" class="nav-item is-tab" active-class="is-active">
                                 <span class="icon">
                                     <i class="fa fa-th-large" aria-hidden="true"></i>
                                 </span>
                                 <span>列表</span>
-                            </a>
+                            </router-link>
                         </li>
-                        <li v-bind:class="{'is-active': settingActive}">
-                            <a @click="activate('setting')">
+                        <li>
+                            <router-link :to="{name: 'setting'}" class="nav-item is-tab" active-class="is-active">
                                 <span class="icon">
                                     <i class="fa fa-cog" aria-hidden="true"></i>
                                 </span>
                                 <span>设置</span>
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
-                <Editor :post="post" v-if="tab === 'edit'"></Editor>
-                <Editor :post="post" v-if="tab === 'new'"></Editor>
-                <List v-if="tab === 'all'" @edit="editPost"></List>
-                <Setting v-if="tab === 'setting'"></Setting>
+                <router-view></router-view>
             </div>
         </section>
         <section class="hero" v-else>
@@ -58,51 +55,16 @@
 </template>
 
 <script>
-import Editor from './dashboard/editor'
-import List from './dashboard/list'
-import Setting from './dashboard/setting'
 
 export default {
-    components: {
-        Editor,
-        List,
-        Setting
-    },
-
     computed: {
         loggedIn() {
             return this.$store.getters.login
-        },
-
-        newActive() {
-            const newTab = this.tab === 'new'
-            if (newTab) {
-                this.post = {
-                    title: '',
-                    seoTitle: '',
-                    content: '',
-                    tags: []
-                }
-            }
-            return newTab
-        },
-
-        allActive() {
-            return this.tab === 'all'
-        },
-
-        editActive() {
-            return this.tab === 'edit'
-        },
-
-        settingActive() {
-            return this.tab === 'setting'
         }
     },
 
     data() {
         return {
-            tab: 'all',
             post: {
                 title: '',
                 seoTitle: '',
@@ -113,14 +75,6 @@ export default {
     },
 
     methods: {
-        activate(tab) {
-            this.tab = tab
-        },
-
-        editPost(post) {
-            this.tab = 'edit'
-            this.post = post
-        }
     }
 }
 </script>

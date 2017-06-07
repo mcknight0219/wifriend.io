@@ -1,6 +1,8 @@
 module Api 
     module V1
         class PostsController < ApplicationController    
+            before_filter :authenticate_request!, except: [:index]
+            
             def index
                 render :json => Post.all.as_json(except: [:updated_at])
             end

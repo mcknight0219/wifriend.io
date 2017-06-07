@@ -4,7 +4,7 @@
             <div class="blog-list">
                  <div class="columns" style="margin-top: 23px;" v-for="post in posts">
                     <div class="column is-offset-2 is-2">
-                        <div>
+                        <div style="font-family: 'Optima';">
                             <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span> {{ getDate(post) }}
                         </div>
                         <div style="margin-top: 7px;">
