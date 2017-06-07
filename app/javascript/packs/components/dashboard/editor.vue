@@ -330,7 +330,6 @@ export default {
 }
 
 :-webkit-full-screen {
-    background: #f9f9f5;
     padding: 0.5em 1em;
     width: 100%;
     height: 100%;
@@ -338,7 +337,6 @@ export default {
 
 :-moz-full-screen {
     padding: 0.5em 1em;
-    background: #f9f9f5;
     width: 100%;
     height: 100%;
 }
