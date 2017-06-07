@@ -103,7 +103,8 @@ export default {
             isPreview: false,
             previewHtml: '',
             tags: [],
-            newTag: ''
+            newTag: '',
+            intervalID: null
         }
     },
 
@@ -130,7 +131,6 @@ export default {
         },
 
         '$route.params.id'(val) {
-            debugger
             if (val === undefined) {
                 this.title = ''
                 this.seoTitle = ''
@@ -266,6 +266,16 @@ export default {
             this.tags = post.tags
             this.editor.getDoc().setValue(post.content)
         }
+
+        // Setup timer to auto save draft
+        if (this.intervalID) window.clearInterval(this.intervalID)
+        this.intervalID = window.setInterval(() => {
+            console.log('Saving draft ... ')
+        }, 5000)
+    },
+
+    beforeDestroy() {
+        if (this.intervalID) window.clearInterval(this.intervalID)
     }
 }
 </script>
