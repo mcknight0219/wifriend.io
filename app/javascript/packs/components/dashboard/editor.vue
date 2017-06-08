@@ -22,12 +22,12 @@
                     </article>
                     <div class="field">
                         <p class="control">
-                            <input class="input" type="text" placeholder="请输入题目" v-model="title">
+                            <input class="bottom-only-input input" type="text" placeholder="请输入题目" v-model="title">
                         </p>
                     </div>
                     <div class="field">
                         <p class="control">
-                            <input class="input is-small" type="text" placeholder="请输入SEO标题" v-model="seoTitle">
+                            <input class="bottom-only-input input is-small" type="text" placeholder="请输入SEO标题" v-model="seoTitle">
                         </p>
                     </div>
                     <div id="wrapper">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="field has-addons" style="margin-top: 15px;">
                         <p class="control">
-                            <input class="input" type="text" placeholder="新的标签" @keyup.enter="addTag" v-model="newTag">
+                            <input class="bottom-only-input input" type="text" placeholder="新的标签" @keyup.enter="addTag" v-model="newTag">
                         </p>
                     </div>
                     <span class="tag is-light" v-for="tag in tags">{{ tag }}
@@ -302,6 +302,15 @@ export default {
     transition: left 0.2s ease;
     font: 16px/1.62 "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
     color: #2c3e50;
+}
+
+.bottom-only-input {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px lightgray solid;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .editor-preview-active {
