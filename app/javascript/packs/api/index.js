@@ -98,3 +98,16 @@ export function updatePost(id, title, content, tags) {
 export function deletePost(id) {
     return DELETE('/api/v1/posts/' + id)
 }
+
+export function uploadImage(form) {
+    return fetch('/api/v1/images', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Basic ' + getJwt(),
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': csrfToken()
+        },
+        credentials: 'same-origin',
+        body: form
+    }).then(response => response.json())
+}

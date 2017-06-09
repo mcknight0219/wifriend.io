@@ -41,6 +41,7 @@ gem 'debase'
 gem 'devise'
 gem 'jwt'
 gem 'capistrano-rails-console', require: false
+gem "paperclip"
 
 # Use Capistrano for deployment
 group :development do
