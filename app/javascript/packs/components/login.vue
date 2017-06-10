@@ -2,7 +2,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-4  is-offset-4">
+                <div class="column is-4  is-offset-4" style="border: 1px solid lightgray">
                     <article class="message is-info" v-if="isInCognitive">
                         <div class="message-header">
                             <p>Info</p>

@@ -85,6 +85,12 @@ export default {
             hljs.initHighlighting.called = false
             hljs.initHighlighting()
         })
+    },
+
+    created () {
+        if (this.$store.getters.allPosts.length === 0) {
+            this.$store.dispatch('getAllPosts')
+        }
     }
 }
 </script>
