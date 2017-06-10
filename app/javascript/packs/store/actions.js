@@ -1,4 +1,4 @@
-import { allPosts, newPost, deletePost, updatePost, login } from '../api'
+import { allPosts, newPost, deletePost, updatePost, login, uploadImage } from '../api'
 export default {
     toggleDropdown: ({commit}, opened) => {
         commit('TOGGLE_DROPDOWN', opened)

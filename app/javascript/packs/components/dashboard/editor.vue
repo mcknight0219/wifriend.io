@@ -46,6 +46,9 @@
                                     <a class="button is-white" @click="toggleQuote">
                                         <i class="fa fa-quote-left"></i>
                                     </a>
+                                    <a class="button is-white" @click="openModal">
+                                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                    </a>
                                     <a class="button is-white">
                                         <i class="fa fa-code" aria-hidden="true"></i>
                                     </a>
@@ -84,15 +87,23 @@
                 </div>
             </div>
         </div>
+        <UploadModalComponent :visible="showModal" @close="closeModal" @url="onImageUploaded"></UploadModalComponent>
     </section>
 </template>
 
 <script>
+import Vue from 'vue'
 var marked = require('marked')
 import CodeMirror from 'codemirror'
+import UploadModal from './UploadModal'
 import 'codemirror/mode/markdown/markdown'
 
+const UploadModalComponent = Vue.extend(UploadModal)
+
 export default {
+    components: {
+        UploadModalComponent
+    },
 
     data() {
         return {
@@ -104,7 +115,8 @@ export default {
             previewHtml: '',
             tags: [],
             newTag: '',
-            intervalID: null
+            intervalID: null,
+            showModal: false    // Image upload modal
         }
     },
 
@@ -199,6 +211,14 @@ export default {
 
         },
 
+        onImageUploaded(url) {
+            const img = "![](" + url +")"
+            const cm = this.editor
+            let cursor = cm.getCursor()
+            cm.replaceRange(img, {line:cursor.line, ch: cursor.ch})
+            cm.focus()
+        },
+
         toggleQuote() {
             const cm = this.editor
             let cursor = cm.getCursor()
@@ -239,6 +259,14 @@ export default {
             }
 
             isFull ? cancel() : requestFull()
+        },
+
+        closeModal() {
+            this.showModal = false
+        },
+
+        openModal() {
+            this.showModal = true
         }
     },
 
