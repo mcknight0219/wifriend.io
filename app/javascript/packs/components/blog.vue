@@ -32,7 +32,7 @@ var marked = require('marked')
 export default {
     computed: {
         posts () {
-            return this.$store.getters.allPosts
+            return this.$store.getters.allPosts.sort((a, b) => a.id < b.id)
         }
     },
 

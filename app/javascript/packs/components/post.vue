@@ -82,8 +82,10 @@ export default {
 
     mounted() {
         this.$nextTick(function () {
-            hljs.initHighlighting.called = false
-            hljs.initHighlighting()
+            const elems = this.$el.querySelectorAll("pre code")
+            for (let i = 0; i < elems.length; i++) {
+                hljs.highlightBlock(elems[i])    
+            }
         })
     },
 
@@ -91,6 +93,7 @@ export default {
         if (this.$store.getters.allPosts.length === 0) {
             this.$store.dispatch('getAllPosts')
         }
+        //hljs.initHighlightingOnLoad()
     }
 }
 </script>
