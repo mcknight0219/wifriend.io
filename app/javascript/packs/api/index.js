@@ -16,6 +16,7 @@ function POST(path, body) {
         headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
+            'Authorization': 'Basic ' + getJwt(),
             'X-CSRF-Token': csrfToken()
         },
         credentials: 'same-origin',

@@ -14,7 +14,7 @@ export default {
         newPost(title, content, tags).then(( { post }) => {
             if (post === undefined) {
                 // adding post failed
-                commit('SET_PULISH_STATUS', 'failed')
+                commit('SET_PUBLISH_STATUS', 'failed')
                 return
             }
             

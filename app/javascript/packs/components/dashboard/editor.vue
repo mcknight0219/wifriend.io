@@ -296,10 +296,12 @@ export default {
         }
 
         // Setup timer to auto save draft
+        /*
         if (this.intervalID) window.clearInterval(this.intervalID)
         this.intervalID = window.setInterval(() => {
             console.log('Saving draft ... ')
         }, 5000)
+        */
     },
 
     beforeDestroy() {
