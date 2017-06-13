@@ -1,6 +1,14 @@
 <template>
   <section class="section">
       <div class="container">
+        <nav class="level is-mobile">
+          <div class="level-left"></div>
+          <div class="level-right">
+            <div class="level-item">
+              <a class="button is-outlined is-inverted" @click="changeLocale">{{ localeStr }}</a>
+            </div>
+          </div>
+        </nav>
         <div class="columns">
           <div class="column is-one-quarter">
             <div id="profile" class="has-text-centered">
@@ -23,6 +31,34 @@
   </section>
 
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      locale: 'zh'
+    }
+  },
+
+  computed: {
+    localeStr() {
+      return this.locale === 'zh' ? 'En' : '简'
+    }
+  },
+
+  watch: {
+    locale (val) {
+      this.$i18n.locale= val
+    }   
+  },
+
+  methods: {
+    changeLocale () {
+      this.locale = this.locale === 'zh' ? 'en' : 'zh'
+    }
+  }  
+}
+</script>
 
 <style lang="scss">
   #profile {

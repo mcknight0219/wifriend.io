@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="level-right">
-          <div class="level-item"><a class="button is-outlined" @click="changeLocale">{{ localeStr }}</a></div>
+          <div class="level-item"><a class="button is-outlined is-inverted" @click="changeLocale">{{ localeStr }}</a></div>
         </div>
       </nav>
     
