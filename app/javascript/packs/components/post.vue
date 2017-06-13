@@ -77,23 +77,31 @@ export default {
 
         seoTitle(t) {
             return t.split('-')[1].trim()
+        },
+
+        highlight() {
+            const elems = this.$el.querySelectorAll("pre code")
+            for (let i = 0; i < elems.length; i++) {
+                hljs.highlightBlock(elems[i])
+            }
         }
     },
 
     mounted() {
         this.$nextTick(function () {
-            const elems = this.$el.querySelectorAll("pre code")
-            for (let i = 0; i < elems.length; i++) {
-                hljs.highlightBlock(elems[i])    
-            }
+            this.highlight()
         })
     },
 
-    created () {
+    created() {
         if (this.$store.getters.allPosts.length === 0) {
             this.$store.dispatch('getAllPosts')
         }
         //hljs.initHighlightingOnLoad()
+    },
+
+    updated() {
+        this.highlight()
     }
 }
 </script>
