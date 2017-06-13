@@ -9,7 +9,20 @@ import App from './app.vue'
 import router from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
+import VueI18n from 'vue-i18n'
 import './styles/main.scss'
+
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+  locale: 'zh',
+  messages: {
+    en: {
+    },
+    zh: {
+    }
+  }
+})
 
 sync(store, router)
 
@@ -23,6 +36,7 @@ router.beforeEach((route, redirect, next) => {
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('wifriend'))
   const app = new Vue({
+    i18n,
     el: 'wifriend',
     router,
     render: h => h(App)
