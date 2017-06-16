@@ -15,8 +15,8 @@
                                 </div>
                             </div>
                             <div class="level-right">
-                                <div class="level-item">
-                                    <span class="tag is-light" v-for="tag in tags">{{ tag }}</span>
+                                <div class="level-item" v-for="tag in tags">
+                                    <span class="tag is-light is-medium" >{{ tag }}</span>
                                 </div>
                             </div>
                         </nav>
