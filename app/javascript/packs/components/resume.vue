@@ -66,9 +66,36 @@
           </div>
         </div>
       </div>
+
+      <div class="columns">
+        <div class="column is-one-third">
+          <h1>Selected Projects</h1>
+        </div>
+      </div>
+
       <div class="columns">
         <div class="column is-one-third">
           <h1>Professional Experience</h1> 
+        </div>
+        <div class="column">
+          <h3>Nov. 2014 ~ now</h3>
+          <p>
+            Software Enginner,
+            <a href="https://gettyimages.com" target="_blank">Gettyimages</a>, Calgary, Canada
+          </p>
+          <ul style="list-style-type: disc; margin-left: 2em;">
+            <li>Frontend development with Javascript, Ruby on Rails</li>
+            <li>Backend development, Database</li>
+          </ul>
+          <h3> Sep. 2013 ~ Nov. 2014</h3>
+          <p>
+            Software Developer,
+            <a href="http://www.markit.com/" target="_blank">Markit</a>, Calgary, Canada
+          </p>
+          <ul style="list-style-type: disc;margin-left: 2em;">
+            <li>High performance engine for scientific calculation</li>
+            <li>DSL implementation and IDE</li>
+          </ul>
         </div>
       </div>
       <div class="columns">
@@ -107,6 +134,8 @@ export default {
   }
 }
 </script>
+
+
 <style scoped>
 /*************************************************
  *  Hugo Academic: an academic theme for Hugo.
