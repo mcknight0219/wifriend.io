@@ -26,14 +26,10 @@
         <div class="column">
           <h1 id="summary">Summary</h1>
           <p>
-            Qiang Guo is a professional developer who focuses on Web Application and iOS now. He has a strong knowledge 
-            of Javascript, Rails, Swift and web programming. Equipped with his expertise, he has created web app and iOS
-            app that many people use and enjoy. 
+            Qiang Guo is a professional developer who focuses on Web Application and iOS now. He has a strong knowledge of Javascript, Rails, Swift and web programming. Equipped with his expertise, he has created web app and iOS app that many people use and enjoy.
           </p>
           <p>
-            Qiang is now living with his lovely wife and son in Canada. He likes all things about technology and innovative
-            ways of utilizing technology to improve life quality. He also likes reading, traveling. Most important of all,
-            he likes trying new things and keeping learning from them.
+            Qiang is now living with his lovely wife and son in Canada. He likes all things about technology and innovative ways of utilizing technology to improve life quality. He also likes reading, traveling. Most important of all, he likes trying new things and keeping learning from them.
           </p>
           <div class="columns">
             <div class="column is-one-half">
@@ -66,16 +62,56 @@
           </div>
         </div>
       </div>
-
+  
       <div class="columns">
         <div class="column is-one-third">
           <h1>Selected Projects</h1>
         </div>
+        <div class="column">
+          <div class="columns">
+            <div class="column is-one-half">
+              <div class="card" style="font-size:1.5em;">
+                <a href="https://superunique.ca" title class="card-image hover-overlay" target="_blank">
+                  <img v-bind:src="icon.superunique" alt="" class="img-responsive">
+                </a>
+                <div class="card-text">
+                  <h4 style="font-size: 1rem;">
+                    <a href="https://superunique.ca" target="_blank">SUPERUNIQUE CA</a>
+                  </h4>
+                  <div class="card-description">
+                    <p style="font-size: 1rem;">
+                      A full-blown e-commerce platform customized for a express shipping company. Thousands of customers use it daily for shopping and shipping package to China. It also is equipped with a comprehensive administration component that the owner could manage inventory, process orders, and analyze data.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card" style="font-size:1.5em;">
+                <a href="wifriend.io" title class="card-image hover-overlay" target="_blank">
+                  <img v-bind:src="icon.wifriend" class="img-responsive">
+                </a>
+                <div class="card-text">
+                  <h4 style="font-size: 1rem;">
+                    <a href="" target="_blank">WiFriend</a>
+                  </h4>
+                  <div class="card-description">
+                    <p style="font-size: 1rem;">
+                      An app that helps people share their WiFi network, as well as contact information, home addresses with
+                      friends coming for a visit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
       </div>
-
+  
       <div class="columns">
         <div class="column is-one-third">
-          <h1>Professional Experience</h1> 
+          <h1>Professional Experience</h1>
         </div>
         <div class="column">
           <h3>Nov. 2014 ~ now</h3>
@@ -98,9 +134,22 @@
           </ul>
         </div>
       </div>
-      <div class="columns">
+      <div id="contact" class="columns">
         <div class="column is-one-third">
           <h1>Contact</h1>
+        </div>
+        <div class="column">
+          <ul>
+            <li>
+              <i style="font-size: 1.5em;" class="fa fa-envelope"></i>
+              <span style="margin-left:1em;"><a href="mailto:mcknight0219@gmail.com">mcknight0219@gmail.com</a></span>
+            </li>
+            <li style="margin-top: 1em;">
+              <i style="font-size: 1.5em;" class="fa fa-clock-o"></i>
+              <span style="margin-left: 1em;"> Please send and email for appointment</span>
+            </li>
+            <li></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -108,10 +157,17 @@
 </template>
 
 <script>
+const wifriendIcon = require('../img/Wifriend.png')
+const superuniqueIcon = require('../img/Superunique.png')
+
 export default {
   data() {
     return {
-      locale: 'zh'
+      locale: 'zh',
+      icon: {
+        wifriend: wifriendIcon,
+        superunique:superuniqueIcon
+      }
     }
   },
 
@@ -134,7 +190,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 /*************************************************
@@ -194,12 +249,14 @@ body {
 }
 
 
+
 /* Body text */
 
 p {
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
 
 
 /* Lists */
@@ -212,6 +269,7 @@ dl {
 }
 
 
+
 /* Navigation bar text */
 
 .navbar-default {
@@ -220,6 +278,7 @@ dl {
   line-height: 1.25;
   text-rendering: optimizeLegibility;
 }
+
 
 
 /* Headings */
@@ -326,6 +385,7 @@ hr {
 }
 
 
+
 /* Quotes */
 
 blockquote {
@@ -368,6 +428,7 @@ blockquote p:last-child {
     width: 1000px;
   }
 }
+
 
 
 /*************************************************
@@ -417,6 +478,7 @@ blockquote p:last-child {
   font-size: 1.1rem;
   color: #b2b2b2;
 }
+
 
 
 /*************************************************
@@ -508,6 +570,7 @@ ul.ul-edu li .description p.institution {
 }
 
 
+
 /*************************************************
  *  Sharing
  **************************************************/
@@ -556,6 +619,7 @@ ul.share li a {
 ul.share li:hover .fa {
   transform: scale(1.4)
 }
+
 
 
 /*************************************************
@@ -679,6 +743,7 @@ article {
 }
 
 
+
 /*************************************************
  *  Publications
  **************************************************/
@@ -741,6 +806,7 @@ article {
 }
 
 
+
 /*************************************************
  * Talks
  **************************************************/
@@ -749,6 +815,7 @@ article {
   color: #090;
   font-size: 1rem;
 }
+
 
 
 /*************************************************
@@ -800,6 +867,7 @@ article {
 .isotope-item:hover {
   z-index: 3;
 }
+
 
 
 /*************************************************
@@ -894,6 +962,7 @@ article {
 }
 
 
+
 /*************************************************
  *  Contact
  **************************************************/
@@ -925,6 +994,7 @@ article {
 }
 
 
+
 /*************************************************
  *  Footer
  **************************************************/
@@ -946,6 +1016,7 @@ footer a#back_to_top i {
 }
 
 
+
 /*************************************************
  *  Button Primary: Color Override
  **************************************************/
@@ -962,6 +1033,7 @@ footer a#back_to_top i {
 .open>.dropdown-toggle.btn-primary {
   background: #0095eb;
 }
+
 
 
 /*************************************************
@@ -991,6 +1063,7 @@ footer a#back_to_top i {
 .btn-toolbar .btn.btn-primary.active {
   background-color: rgba(0, 89, 175, 1);
 }
+
 
 
 /*************************************************
@@ -1031,6 +1104,7 @@ footer a#back_to_top i {
 .btn-danger.btn-outline:hover {
   color: #fff;
 }
+
 
 
 /*************************************************
@@ -1199,6 +1273,7 @@ nav#navbar-main li {
 }
 
 
+
 /*************************************************
  *  Tables
  **************************************************/
@@ -1245,6 +1320,7 @@ table table {
 }
 
 
+
 /* Table Striped */
 
 table>tbody>tr:nth-child(odd)>td,
@@ -1253,12 +1329,14 @@ table>tbody>tr:nth-child(odd)>th {
 }
 
 
+
 /* Table Hover */
 
 table>tbody>tr:hover>td,
 table>tbody>tr:hover>th {
   background-color: #e5e5e5;
 }
+
 
 
 /*************************************************

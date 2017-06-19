@@ -6,7 +6,14 @@ module.exports = {
   use: ExtractTextPlugin.extract({
     fallback: 'style-loader',
     use: [
-      { loader: 'css-loader', options: { minimize: env.NODE_ENV === 'production' } },
+      { 
+        loader: 'css-loader', 
+        options: { 
+          minimize: env.NODE_ENV === 'production',
+          modules: true,
+          localIdentName: '[path][name]__[local]--[hash:base64:5]' 
+        } 
+      },
       'postcss-loader',
       'sass-loader'
     ]
