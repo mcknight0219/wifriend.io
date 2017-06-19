@@ -5,7 +5,7 @@
         <div class="level-left"></div>
         <div class="level-right">
           <div class="level-item">
-            <a class="button is-outlined is-inverted" @click="changeLocale">{{ localeStr }}</a>
+            <a class="button is-outlined is-inverted" @click="downloadPDF"><span class="icon"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span> <span>PDF</span></a>
           </div>
         </div>
       </nav>
@@ -163,11 +163,11 @@
 <script>
 const wifriendIcon = require('../img/Wifriend.png')
 const superuniqueIcon = require('../img/Superunique.png')
+const pdf = require('../doc/resume.pdf')
 
 export default {
   data() {
     return {
-      locale: 'zh',
       icon: {
         wifriend: wifriendIcon,
         superunique:superuniqueIcon
@@ -175,21 +175,14 @@ export default {
     }
   },
 
-  computed: {
-    localeStr() {
-      return this.locale === 'zh' ? 'En' : '简'
-    }
-  },
-
-  watch: {
-    locale(val) {
-      this.$i18n.locale = val
-    }
-  },
-
   methods: {
-    changeLocale() {
-      this.locale = this.locale === 'zh' ? 'en' : 'zh'
+    downloadPDF () {
+      var a = window.document.createElement('a')
+      a.href = pdf
+      a.download = "Qiang Guo's Resume"
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
     }
   }
 }
