@@ -144,9 +144,13 @@
               <i style="font-size: 1.5em;" class="fa fa-envelope"></i>
               <span style="margin-left:1em;"><a href="mailto:mcknight0219@gmail.com">mcknight0219@gmail.com</a></span>
             </li>
+            <li style="margin-top:1em;">
+              <i style="font-size:1.5em;" class="fa fa-phone" aria-hidden="true"></i>
+              <span style="margin-left:1em">587-707-8421</span>
+            </li>
             <li style="margin-top: 1em;">
               <i style="font-size: 1.5em;" class="fa fa-clock-o"></i>
-              <span style="margin-left: 1em;"> Please send and email for appointment</span>
+              <span style="margin-left: 1em;"> Please call or send email for appointment</span>
             </li>
             <li></li>
           </ul>
