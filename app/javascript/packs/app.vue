@@ -11,10 +11,10 @@
           <span></span>
         </span>
         <div id="nav-menu" class="nav-right nav-menu" v-bind:class="{ 'is-active': showDropdown }">
-          <router-link :to="{name: 'home' }" class="nav-item is-tab" active-class="is-active">主页</router-link>
-          <router-link :to="{name: 'blog' }" class="nav-item is-tab" active-class="is-active">博客</router-link>
-          <router-link :to="{name: 'resume'}" class="nav-item is-tab" active-class="is-active">简历</router-link>
-          <router-link :to="{name: 'about'}" class="nav-item is-tab" active-class="is-active">关于</router-link>
+          <router-link :to="{name: 'home' }" class="nav-item is-tab" active-class="is-active">Home</router-link>
+          <router-link :to="{name: 'blog' }" class="nav-item is-tab" active-class="is-active">Blog</router-link>
+          <router-link :to="{name: 'resume'}" class="nav-item is-tab" active-class="is-active">Resume</router-link>
+          <router-link :to="{name: 'about'}" class="nav-item is-tab" active-class="is-active">About</router-link>
           <router-link :to="{name: 'login'}" class="nav-item" active-class="is-active">
             <a class="button is-active">{{ !isLogin ? '登陆' : '登出' }}</a>
           </router-link>
