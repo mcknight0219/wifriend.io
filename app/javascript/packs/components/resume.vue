@@ -163,6 +163,7 @@
 <script>
 const wifriendIcon = require('../img/Wifriend.png')
 const superuniqueIcon = require('../img/Superunique.png')
+const headShot = require('../img/headshot.jpg')
 const pdf = require('../doc/resume.pdf')
 
 export default {
@@ -489,7 +490,7 @@ blockquote p:last-child {
 }
 
 #profile .portrait {
-  background-image: url('https://sourcethemes.com/academic/img/portrait.jpg');
+  background-image: url('../img/headshot.jpg');
   width: 200px;
   height: 200px;
   margin: 0 auto;
