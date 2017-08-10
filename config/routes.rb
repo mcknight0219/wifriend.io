@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :posts
       resources :images
       post 'auth_user' => 'authentication#authenticate_user'
+      get 'mobileconfig' => 'mobileconfig#create'
     end
   end
   

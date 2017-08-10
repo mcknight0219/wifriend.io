@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
     @current_user = User.find(auth_token[:user_id])
   rescue JWT::VerificationError, JWT::DecodeError
-    redner json: { status: 'unauthorized' }
+    render json: { status: 'unauthorized' }
   end
 
   private
