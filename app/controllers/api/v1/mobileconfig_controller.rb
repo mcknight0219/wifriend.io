@@ -17,6 +17,10 @@ module Api
         unless params[:api_key] == Rails.application.secrets.api_key
           render json: {status: 'unauthroized'}, status: :unauthorized
         end
+
+        unless params.has_key?(:ssid) && params.has_key?(:password)
+          render json: {status: 'no ssid or password', status: :unprocessable_entity}
+        end
       end
 
       def sign_with_cert(data)
