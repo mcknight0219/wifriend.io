@@ -14,7 +14,8 @@ module Api
       private
       
       def verify_api_key!
-        unless params[:api_key] && params[:api_key] == Rails.application.secrets.api_key
+        byebug
+        unless params[:api_key] == Rails.application.secrets.api_key
           render json: {status: 'unauthroized'}, status: :unauthorized
         end
       end
