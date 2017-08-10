@@ -14,7 +14,7 @@ module Api
       private
       
       def verify_api_key!
-        unless params[:api_key]
+        unless params[:api_key] && params[:api_key] == Rails.application.secrets.api_key
           render json: {status: 'unauthroized'}, status: :unauthorized
         end
       end
@@ -23,7 +23,7 @@ module Api
         key = OpenSSL::PKey::RSA.new File.read "#{Dir.home}/privkey.pem"
         cert = OpenSSL::X509::Certificate.new File.read "#{Dir.home}/cert.pem"
         chain = OpenSSL::X509::Certificate.new File.read "#{Dir.home}/chain.pem"
-        return OpenSSL::PKCS7.sign(cert, key, data, [chain], OpenSSL::PKCS7::BINARY).to_der
+        OpenSSL::PKCS7.sign(cert, key, data, [chain], OpenSSL::PKCS7::BINARY).to_der
       end
     end
   end
